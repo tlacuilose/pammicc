@@ -36,7 +36,7 @@ projectRoutes.route("/project/:id").get(function (req, res) {
 });
 
 // Upload a new project.
-projectRoutes.route("/project/add").post(function (req, response) {
+projectRoutes.route("/project/new").post(function (req, response) {
   let db_connect = dbo.getDb();
   let project = {
     project_name: req.body.project_name,

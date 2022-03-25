@@ -15,7 +15,7 @@ React.js app
 - [Tailwindcss for design elements](https://tailwindcss.com/docs)
 - [Clean architecture, semi MVVM](https://paulallies.medium.com/clean-mvvm-with-react-and-react-hooks-ebc37b22542f)
 
-## Instalation
+## Installation
 
 In client/
 
@@ -33,7 +33,7 @@ Express.js app
 
 - [MongoDB](https://www.mongodb.com/)
 
-## Instalation
+## Installation
 
 In server/
 
