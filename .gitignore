@@ -2,7 +2,9 @@
 
 # Env
 client/config.env
+client/.env
 server/config.env
+server/.env
 
 # dependencies
 client/node_modules
