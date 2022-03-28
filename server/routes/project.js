@@ -12,7 +12,7 @@ const dbo = require("../db/conn")
 const ObjectId = require("mongodb").ObjectId;
 
 // Get a list of all projects
-projectRoutes.route("/project/all").get(function (req, res) {
+projectRoutes.route("/projects").get(function (req, res) {
   let db_connect = dbo.getDb();
   db_connect
     .collection("projects")
@@ -24,7 +24,7 @@ projectRoutes.route("/project/all").get(function (req, res) {
 });
 
 // Get a single project by id
-projectRoutes.route("/project/:id").get(function (req, res) {
+projectRoutes.route("/projects/:id").get(function (req, res) {
   let db_connect = dbo.getDb();
   let id_query = { _id: ObjectId(req.params.id)};
   db_connect
@@ -36,11 +36,13 @@ projectRoutes.route("/project/:id").get(function (req, res) {
 });
 
 // Upload a new project.
-projectRoutes.route("/project/new").post(function (req, response) {
+projectRoutes.route("/projects/new").post(function (req, response) {
   let db_connect = dbo.getDb();
   let project = {
-    project_name: req.body.project_name,
-    project_description: req.body.project_description,
+    name: req.body.name,
+    description: req.body.description,
+    url: req.body.url,
+    tags: req.body.tags,
   };
   db_connect.collection("projects").insertOne(project, function (err, res) {
     if (err) throw err;
