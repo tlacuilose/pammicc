@@ -2,8 +2,7 @@ const server_url =  'http://localhost:5005';
 
 module.exports = {
   getProjects: async function() {
-    const response = await fetch(`${server_url}/project/all`).catch(error => {
-      console.log(error);
+    const response = await fetch(`${server_url}/projects`).catch(error => {
       throw error;
     });
 
@@ -20,7 +19,7 @@ module.exports = {
     return json;
   },
   newProject: async function(newProject) {
-    await fetch(`${server_url}/project/new`, {
+    await fetch(`${server_url}/projects/new`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

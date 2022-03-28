@@ -1,19 +1,37 @@
 const ds = require("../datasources/pammicc-api");
 
-function Project(id, name, description) {
-  this.id = id;
-  this.name = name;
-  this.description = description;
+class Project {
+  constructor (id, name, description, url, tags) {
+    this.id = id;
+    this.name = name;
+    this.description = description;
+    this.url = url;
+    this.tags = tags;
+  }
+
+  validate() {
+    if (this.name === "") {
+      throw new Error("Cant upload a project without a name.");
+    }
+  }
 }
 
 module.exports = {
   getProjects: async function() {
     try {
-      var projects = [];
+      let projects = [];
       const response = await ds.getProjects();
       if (Array.isArray(response)) {
         response.map( project => {
-          projects.push(new Project(project._id, project.project_name, project.project_description))
+          projects.push(
+            new Project(
+              project._id,
+              project.name,
+              project.description,
+              project.url,
+              project.tags
+            )
+          )
         });
         return {
           result: projects,
@@ -33,10 +51,14 @@ module.exports = {
   },
   addNewProject: async function(values) {
     try {
-      const newProject = {
-        "project_name": values.name,
-        "project_description": values.description
-      }
+      const newProject = new Project(
+        null,
+        values.name,
+        values.description,
+        values.url,
+        values.tags
+      );
+      newProject.validate();
 
       await ds.newProject(newProject);
       return null;

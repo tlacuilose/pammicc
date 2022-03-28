@@ -7,7 +7,9 @@ export default function NewProjectViewModel() {
   const [error, setError] = useState("");
   const [values, setValues] = useState({
     name: "",
-    description: ""
+    description: "",
+    url: "",
+    tags: ""
   });
 
   function onChange(event) {

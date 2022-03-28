@@ -15,7 +15,7 @@ export default function Navbar() {
               <li><a onClick={() => navigate(`/`)}>Catalog</a></li>
             </ul>
           </div>
-          <a class="btn btn-ghost normal-case text-xl" onClick={() => navigate(`/`)}>daisyUI</a>
+          <a class="btn btn-ghost normal-case text-xl" onClick={() => navigate(`/`)}>Pammicc</a>
         </div>
         <div class="navbar-end">
           <div class="hidden lg:flex">
