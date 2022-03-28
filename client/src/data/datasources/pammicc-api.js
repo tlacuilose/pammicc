@@ -1,4 +1,4 @@
-const server_url =  'http://localhost:5005';
+const server_url =  process.env.REACT_APP_API_URL
 
 module.exports = {
   getProjects: async function() {
