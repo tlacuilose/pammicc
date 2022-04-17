@@ -6,11 +6,11 @@ export default function SignupUser() {
   const {registerUser, name, lastName, email, password, onChange, error} = SignupUserViewModel();
 
   return (
-    <div class="md:container md:mx-auto py-24 px-32">
+    <div class="md:container md:mx-auto p-2">
       {error &&
         <ErrorAlert message={error.message} />
       }
-      <div class="hero-content flex-col lg:flex-row-reverse">
+      <div class="hero-content flex-col lg:flex-row-reverse py-20 sm:px-32">
         <div class="text-center lg:text-left">
           <h1 class="text-5xl font-bold">Register now!</h1>
           <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>

@@ -6,11 +6,11 @@ export default function LoginUser() {
   const {loginUser, email, password, onChange, error} = LoginUserViewModel();
 
   return (
-    <div class="md:container md:mx-auto p-32">
+    <div class="md:container md:mx-auto p-2">
       {error &&
         <ErrorAlert message={error.message} />
       }
-      <div class="hero-content flex-col lg:flex-row-reverse">
+      <div class="hero-content flex-col lg:flex-row-reverse py-28 sm:px-28">
         <div class="text-center lg:text-left">
           <h1 class="text-5xl font-bold">Login now!</h1>
           <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
