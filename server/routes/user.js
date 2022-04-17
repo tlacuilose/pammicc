@@ -49,7 +49,7 @@ userRoutes.route('/login').post((req, response, next) => {
     passport.authenticate("login", { session: false }, async (err, user) => {
         try {
             if (err || !user) {
-                return res.status(401).send('No auth');
+                return response.status(401).send('No auth');
             }
             req.login(user, { session: false }, async (error) => {
                 if (error) return next(error);
