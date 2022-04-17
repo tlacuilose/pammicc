@@ -845,6 +845,15 @@ html {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
+.hero-content {
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 80rem;
+  gap: 1rem;
+  padding: 1rem;
+}
 .input {
   flex-shrink: 1;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
@@ -870,6 +879,12 @@ html {
 }
 .link {
   cursor: pointer;
+  text-decoration-line: underline;
+}
+.link-hover {
+  text-decoration-line: none;
+}
+.link-hover:hover {
   text-decoration-line: underline;
 }
 .menu {
@@ -1106,6 +1121,20 @@ html {
 .btn-ghost:focus-visible {
   outline: 2px solid 0 0 2px currentColor;
 }
+.btn-link {
+  border-color: transparent;
+  background-color: transparent;
+  --tw-text-opacity: 1;
+  color: hsl(var(--p) / var(--tw-text-opacity));
+}
+.btn-link:hover, .btn-link.btn-active {
+  border-color: transparent;
+  background-color: transparent;
+  text-decoration-line: underline;
+}
+.btn-link:focus-visible {
+  outline: 2px solid 0 0 2px currentColor;
+}
 .btn-outline.btn-primary {
   --tw-text-opacity: 1;
   color: hsl(var(--p) / var(--tw-text-opacity));
@@ -1205,6 +1234,9 @@ html {
 .drawer-toggle:focus-visible ~ .drawer-content .drawer-button.btn-ghost {
   outline: 2px solid currentColor;
 }
+.drawer-toggle:focus-visible ~ .drawer-content .drawer-button.btn-link {
+  outline: 2px solid currentColor;
+}
 .dropdown.dropdown-open .dropdown-content, .dropdown.dropdown-hover:hover .dropdown-content, .dropdown:focus .dropdown-content, .dropdown:focus-within .dropdown-content {
   --tw-scale-x: 1;
   --tw-scale-y: 1;
@@ -1213,6 +1245,12 @@ html {
 .label-text {
   font-size: 0.875rem;
   line-height: 1.25rem;
+  --tw-text-opacity: 1;
+  color: hsl(var(--bc) / var(--tw-text-opacity));
+}
+.label-text-alt {
+  font-size: 0.75rem;
+  line-height: 1rem;
   --tw-text-opacity: 1;
   color: hsl(var(--bc) / var(--tw-text-opacity));
 }
@@ -1547,6 +1585,9 @@ html {
 .mt-3 {
   margin-top: 0.75rem;
 }
+.ml-2 {
+  margin-left: 0.5rem;
+}
 .mr-1 {
   margin-right: 0.25rem;
 }
@@ -1574,11 +1615,20 @@ html {
 .w-52 {
   width: 13rem;
 }
+.w-full {
+  width: 100%;
+}
+.max-w-sm {
+  max-width: 24rem;
+}
 .flex-shrink-0 {
   flex-shrink: 0;
 }
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.flex-col {
+  flex-direction: column;
 }
 .justify-end {
   justify-content: flex-end;
@@ -1605,8 +1655,26 @@ html {
 .p-0 {
   padding: 0px;
 }
+.p-32 {
+  padding: 8rem;
+}
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+.py-24 {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+.px-32 {
+  padding-left: 8rem;
+  padding-right: 8rem;
+}
 .pl-2 {
   padding-left: 0.5rem;
+}
+.text-center {
+  text-align: center;
 }
 .text-xl {
   font-size: 1.25rem;
@@ -1615,6 +1683,13 @@ html {
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
+}
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+.font-bold {
+  font-weight: 700;
 }
 .normal-case {
   text-transform: none;
@@ -1705,5 +1780,13 @@ html {
 
   .lg\:grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .lg\:flex-row-reverse {
+    flex-direction: row-reverse;
+  }
+
+  .lg\:text-left {
+    text-align: left;
   }
 }

@@ -16,14 +16,22 @@ export default function Navbar() {
             </ul>
           </div>
           <a class="btn btn-ghost normal-case text-xl" onClick={() => navigate(`/`)}>Pammicc</a>
-        </div>
-        <div class="navbar-end">
           <div class="hidden lg:flex">
             <ul class="menu menu-horizontal p-0 pl-2">
               <li><a onClick={() => navigate(`/`)}>Catalog</a></li>
             </ul>
+            <ul class="menu menu-horizontal p-0 pl-2">
+              <li><a class="btn btn-link" onClick={() => navigate(`/new`)}>Add Project</a></li>
+            </ul>
           </div>
-          <a class = "btn btn-primary" onClick={() => navigate(`/new`)}>New Project</a>
+        </div>
+        <div class="navbar-end">
+          <div class="hidden lg:flex">
+            <ul class="menu menu-horizontal p-0 pl-2">
+              <li><a onClick={() => navigate(`/login`)}>Login</a></li>
+            </ul>
+          </div>
+          <a class = "btn btn-primary ml-2" onClick={() => navigate(`/signup`)}>Sign up</a>
         </div>
       </div>
     </div>
