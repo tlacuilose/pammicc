@@ -3,6 +3,7 @@
 # Env
 client/config.env
 client/.env
+client/.envprod
 server/config.env
 server/.env
 

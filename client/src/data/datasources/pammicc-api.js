@@ -1,7 +1,7 @@
 const server_url =  process.env.REACT_APP_API_URL
 
 export async function getProjects () {
-    const response = await fetch(`${server_url}/projects`).catch(error => {
+  const response = await fetch(`${server_url}/projects`).catch(error => {
     throw error;
   });
 
@@ -19,7 +19,7 @@ export async function getProjects () {
 }
 
 export async function newProject(newProject) {
-  await fetch(`${server_url}/projects/new`, {
+  const response = await fetch(`${server_url}/projects/new`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -29,4 +29,50 @@ export async function newProject(newProject) {
   .catch(error => {
     throw error;
   })
+
+  if (!response.ok) {
+    throw new Error("An error ocurred adding the project.")
+  }
+}
+
+export async function login(user) {
+  const response = await fetch(`${server_url}/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  })
+  .catch(error => {
+    throw error;
+  })
+
+  if (response.status == 401)  {
+    throw new Error("Please provide a valid email and password combination.")
+  }
+
+  if (!response.ok) {
+    throw new Error("An error ocurred login user.")
+  }
+}
+
+export async function register(newUser) {
+  const response = await fetch(`${server_url}/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newUser),
+  })
+  .catch(error => {
+    throw error;
+  })
+
+  if (response.status == 409) {
+    throw new Error("This email is already registered.")
+  }
+
+  if (!response.ok) {
+    throw new Error("An error ocurred registering user.")
+  }
 }

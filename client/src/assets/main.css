@@ -367,7 +367,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
-:root {
+:root,
+[data-theme] {
   background-color: hsla(var(--b1) / var(--tw-bg-opacity, 1));
   color: hsla(var(--bc) / var(--tw-text-opacity, 1));
 }
@@ -663,6 +664,7 @@ html {
   font-weight: 600;
   text-transform: uppercase;
   text-transform: var(--btn-text-case, uppercase);
+  text-decoration-line: none;
   border-width: var(--border-btn, 1px);
   animation: button-pop var(--animation-btn, 0.25s) ease-out;
   --tw-border-opacity: 1;
@@ -673,11 +675,6 @@ html {
 }
 .btn-disabled, .btn[disabled] {
   pointer-events: none;
-  --tw-border-opacity: 0;
-  background-color: hsl(var(--n) / var(--tw-bg-opacity));
-  --tw-bg-opacity: 0.2;
-  color: hsl(var(--bc) / var(--tw-text-opacity));
-  --tw-text-opacity: 0.2;
 }
 .btn.loading, .btn.loading:hover {
   pointer-events: none;
@@ -845,6 +842,15 @@ html {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
+.hero-content {
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 80rem;
+  gap: 1rem;
+  padding: 1rem;
+}
 .input {
   flex-shrink: 1;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
@@ -870,6 +876,12 @@ html {
 }
 .link {
   cursor: pointer;
+  text-decoration-line: underline;
+}
+.link-hover {
+  text-decoration-line: none;
+}
+.link-hover:hover {
   text-decoration-line: underline;
 }
 .menu {
@@ -1106,6 +1118,20 @@ html {
 .btn-ghost:focus-visible {
   outline: 2px solid 0 0 2px currentColor;
 }
+.btn-link {
+  border-color: transparent;
+  background-color: transparent;
+  --tw-text-opacity: 1;
+  color: hsl(var(--p) / var(--tw-text-opacity));
+}
+.btn-link:hover, .btn-link.btn-active {
+  border-color: transparent;
+  background-color: transparent;
+  text-decoration-line: underline;
+}
+.btn-link:focus-visible {
+  outline: 2px solid 0 0 2px currentColor;
+}
 .btn-outline.btn-primary {
   --tw-text-opacity: 1;
   color: hsl(var(--p) / var(--tw-text-opacity));
@@ -1117,6 +1143,13 @@ html {
   background-color: hsl(var(--pf, var(--p)) / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
   color: hsl(var(--pc) / var(--tw-text-opacity));
+}
+.btn-disabled, .btn-disabled:hover, .btn[disabled], .btn[disabled]:hover {
+  --tw-border-opacity: 0;
+  background-color: hsl(var(--n) / var(--tw-bg-opacity));
+  --tw-bg-opacity: 0.2;
+  color: hsl(var(--bc) / var(--tw-text-opacity));
+  --tw-text-opacity: 0.2;
 }
 .btn.loading.btn-square:before, .btn.loading.btn-circle:before {
   margin-right: 0px;
@@ -1205,6 +1238,9 @@ html {
 .drawer-toggle:focus-visible ~ .drawer-content .drawer-button.btn-ghost {
   outline: 2px solid currentColor;
 }
+.drawer-toggle:focus-visible ~ .drawer-content .drawer-button.btn-link {
+  outline: 2px solid currentColor;
+}
 .dropdown.dropdown-open .dropdown-content, .dropdown.dropdown-hover:hover .dropdown-content, .dropdown:focus .dropdown-content, .dropdown:focus-within .dropdown-content {
   --tw-scale-x: 1;
   --tw-scale-y: 1;
@@ -1213,6 +1249,12 @@ html {
 .label-text {
   font-size: 0.875rem;
   line-height: 1.25rem;
+  --tw-text-opacity: 1;
+  color: hsl(var(--bc) / var(--tw-text-opacity));
+}
+.label-text-alt {
+  font-size: 0.75rem;
+  line-height: 1rem;
   --tw-text-opacity: 1;
   color: hsl(var(--bc) / var(--tw-text-opacity));
 }
@@ -1261,7 +1303,7 @@ html {
   --tw-border-opacity: 1;
   border-color: hsl(var(--p) / var(--tw-border-opacity));
 }
-.menu[class*="p-"] li > * {
+.menu[class*=" p-"] li > *, .menu[class^="p-"] li > * {
   border-radius: var(--rounded-btn, 0.5rem);
 }
 .menu :where(li.bordered > *) {
@@ -1368,7 +1410,7 @@ html {
 .menu > :where(li) > :where(ul) :where(li) :where(ul) {
   padding-left: 1rem;
 }
-.menu > :where(li) > :where(ul) :where(li) :where(:not(ul)) {
+.menu > :where(li) > :where(ul) :where(li) > :where(:not(ul)) {
   width: 100%;
   white-space: nowrap;
 }
@@ -1544,8 +1586,17 @@ html {
   border-bottom-right-radius: inherit;
   border-bottom-left-radius: unset;
 }
+.relative {
+  position: relative;
+}
+.z-10 {
+  z-index: 10;
+}
 .mt-3 {
   margin-top: 0.75rem;
+}
+.ml-2 {
+  margin-left: 0.5rem;
 }
 .mr-1 {
   margin-right: 0.25rem;
@@ -1574,11 +1625,20 @@ html {
 .w-52 {
   width: 13rem;
 }
+.w-full {
+  width: 100%;
+}
+.max-w-sm {
+  max-width: 24rem;
+}
 .flex-shrink-0 {
   flex-shrink: 0;
 }
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.flex-col {
+  flex-direction: column;
 }
 .justify-end {
   justify-content: flex-end;
@@ -1605,8 +1665,23 @@ html {
 .p-0 {
   padding: 0px;
 }
+.py-28 {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+.py-20 {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
 .pl-2 {
   padding-left: 0.5rem;
+}
+.text-center {
+  text-align: center;
 }
 .text-xl {
   font-size: 1.25rem;
@@ -1615,6 +1690,13 @@ html {
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
+}
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+.font-bold {
+  font-weight: 700;
 }
 .normal-case {
   text-transform: none;
@@ -1642,6 +1724,18 @@ html {
 .drop-shadow-md {
   --tw-drop-shadow: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+@media (min-width: 640px) {
+
+  .sm\:px-28 {
+    padding-left: 7rem;
+    padding-right: 7rem;
+  }
+
+  .sm\:px-32 {
+    padding-left: 8rem;
+    padding-right: 8rem;
+  }
 }
 @media (min-width: 768px) {
 
@@ -1705,5 +1799,13 @@ html {
 
   .lg\:grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .lg\:flex-row-reverse {
+    flex-direction: row-reverse;
+  }
+
+  .lg\:text-left {
+    text-align: left;
   }
 }
