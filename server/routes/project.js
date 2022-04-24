@@ -35,20 +35,26 @@ projectRoutes.route("/projects/:id").get(function (req, res) {
     });
 });
 
-// Upload a new project.
-projectRoutes.route("/projects/new").post(function (req, response) {
-  let db_connect = dbo.getDb();
-  let project = {
-    name: req.body.name,
-    description: req.body.description,
-    url: req.body.url,
-    tags: req.body.tags,
-  };
-  db_connect.collection("projects").insertOne(project, function (err, res) {
-    if (err) throw err;
-    response.json(res);
-  });
-});
+// ------------------------------------------------------------------------------
+
+// MOVED to /secureRoutes
+
+// // Upload a new project.
+// projectRoutes.route("/projects/new").post(function (req, response) {
+//   let db_connect = dbo.getDb();
+//   let project = {
+//     name: req.body.name,
+//     description: req.body.description,
+//     url: req.body.url,
+//     tags: req.body.tags,
+//   };
+//   db_connect.collection("projects").insertOne(project, function (err, res) {
+//     if (err) throw err;
+//     response.json(res);
+//   });
+// });
+
+// -------------------------------------------------------------------------------
 
 // Update a project by id.
 /* TODO: Add update and delete queries.

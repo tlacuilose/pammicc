@@ -12,7 +12,10 @@ require('./configs/passport');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const secureRoutes = require("./routes/secure-routes");
 
+//JWT Middleware
+// require('./auth/auth');
 
 // Get Port from .env
 const port = process.env.PORT;
@@ -36,6 +39,7 @@ app.use(cors());
 app.use(express.json());
 app.use(require("./routes/project"));
 app.use(require('./routes/user'));
+app.use(passport.authenticate('jwt',{session:false}),secureRoutes)
 
 
 app.listen(port, () => {

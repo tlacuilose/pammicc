@@ -2,6 +2,30 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const PassportLocal = require('passport-local').Strategy;
 
+const JWTstrategy = require('passport-jwt').Strategy;
+
+var cookieExtractor = function(req) {
+    var token = null;
+    if (req && req.cookies) token = req.cookies['jwt'];
+    return token;
+}
+
+passport.use(
+    new JWTstrategy(
+    {
+        secretOrKey: 'TOP_SECRET',
+        jwtFromRequest: cookieExtractor
+    },
+    async (token, done) => {
+        try {
+            return done(null, token);
+        } catch (error) {
+            done(error);
+        }
+    }
+    )
+);
+
 const dbo = require('../db/conn');
 
 const loginCallback = (req, email, password, done) => {

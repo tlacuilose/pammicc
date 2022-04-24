@@ -1,6 +1,6 @@
 const express = require("express");
 const passport = require("passport");
-
+const jwt = require('jsonwebtoken');
 
 // projectRoutes is an instance of the express router.
 // We define routes here.
@@ -53,11 +53,17 @@ userRoutes.route('/login').post((req, response, next) => {
             }
             req.login(user, { session: false }, async (error) => {
                 if (error) return next(error);
-                return response.cookie('session', user, {
+                const body = { _id: user._id, email: user.email , role: user.role};
+                const token = jwt.sign({ user: body }, 'TOP_SECRET');  //change TOP_SECRET for env variable in prod
+                response.cookie('session', user, {
                     httpOnly: true,
                     maxAge: 9000000,
                 })
-                .send('Auth cookie created');
+                response.cookie('jwt', token, {
+                    httpOnly: true,
+                    maxAge: 9000000,
+                })
+                .send('Auth cookie created ' + token);
             });
         } catch (err) {
             return next(err);
@@ -71,6 +77,7 @@ userRoutes.route('/login').post((req, response, next) => {
 });
 
 userRoutes.route('/logout').get((req, res) => {
+    res.clearCookie("jwt");
     res.clearCookie("session").status(200).send("Successfully log out");
 });
 
