@@ -28,9 +28,12 @@ async function login(user) {
   const response = await fetch(`${server_url}/login`, {
     method: "POST",
     headers: {
+      "Access-Control-Allow-Origin": window.location.host,
+      "Access-Control-Allow-Credentials": true,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(user),
+    credentials: 'include',
   })
   .catch(error => {
     throw error;
@@ -51,9 +54,12 @@ async function register(newUser) {
   const response = await fetch(`${server_url}/register`, {
     method: "POST",
     headers: {
+      "Access-Control-Allow-Origin": window.location.host,
+      "Access-Control-Allow-Credentials": true,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(newUser),
+    credentials: 'include',
   })
   .catch(error => {
     throw error;

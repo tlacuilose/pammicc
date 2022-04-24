@@ -56,11 +56,11 @@ userRoutes.route('/login').post((req, response, next) => {
                 const body = { _id: user._id, email: user.email , role: user.role};
                 const token = jwt.sign({ user: body }, 'TOP_SECRET');  //change TOP_SECRET for env variable in prod
                 response.cookie('session', user, {
-                    httpOnly: true,
+                    httpOnly: false,
                     maxAge: 9000000,
                 })
                 response.cookie('jwt', token, {
-                    httpOnly: true,
+                    httpOnly: false,
                     maxAge: 9000000,
                 })
                 .send('Auth cookie created ' + token);
