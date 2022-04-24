@@ -17,12 +17,14 @@ export default function SignupUserViewModel() {
   }
 
   async function registerUser() {
-    const error = await authService.registerUser(values);
-    if (error) {
+    const response = await authService.registerUser(values).catch( error => {
       setError(error);
-    } else {
-      navigate(`/`);
-    }
+    });
+
+    const data = await response.json()
+    console.log(data)
+    console.log(data.token)
+    navigate(`/`);
   }
 
   return {
