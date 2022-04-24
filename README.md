@@ -39,4 +39,5 @@ In server/
 
 ```bash
 node server.js
+npm start to start the server with nodemon dev dependency
 ```
