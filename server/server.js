@@ -23,18 +23,6 @@ const port = process.env.PORT;
 // Start express app.
 const app = express();
 
-const allowedOrigins = ['http://localhost:3000']
-var corsOptions = {
-  credentials: true,
-  origin: function(origin, callback) {
-    if (allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error("Not allowed by CORS"))
-    }
-  }
-}
-
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.SECRET || 'secret'));
 app.use(session({
@@ -46,7 +34,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+var corsOptions = {
+    origin: 'http://localhost:3000',
+    credentials: true 
+};
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(require("./routes/project"));

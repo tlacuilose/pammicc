@@ -22,9 +22,12 @@ export async function newProject(newProject) {
   const response = await fetch(`${server_url}/projects/new`, {
     method: "POST",
     headers: {
+      "Access-Control-Allow-Origin": window.location.host,
+      "Access-Control-Allow-Credentials": true,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(newProject),
+    credentials: 'include',
   })
   .catch(error => {
     throw error;

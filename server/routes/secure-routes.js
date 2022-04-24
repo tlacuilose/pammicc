@@ -19,17 +19,27 @@ function parseJwt (token) {
 
 // Upload a new project.
 secureRoutes.route("/projects/new").post(function (req, response) {
-    let db_connect = dbo.getDb();
-    let project = {
-      name: req.body.name,
-      description: req.body.description,
-      url: req.body.url,
-      tags: req.body.tags,
-    };
-    db_connect.collection("projects").insertOne(project, function (err, res) {
-      if (err) throw err;
-      response.json(res);
-    });
+    var token = null;
+    if (req && req.cookies) token = req.cookies['jwt'];
+    jsonPayload = parseJwt(token);
+
+    // Check that the user is project_uploader.
+    role = jsonPayload.user.role
+    if(role!="project_uploader") {
+      response.status(403).send({ message: "Response has been declined" });
+    }else{
+      let db_connect = dbo.getDb();
+      let project = {
+        name: req.body.name,
+        description: req.body.description,
+        url: req.body.url,
+        tags: req.body.tags,
+      };
+      db_connect.collection("projects").insertOne(project, function (err, res) {
+        if (err) throw err;
+        response.status(200).send({ message: "Response has been approved" });
+      });
+    }
   }
 );
 
