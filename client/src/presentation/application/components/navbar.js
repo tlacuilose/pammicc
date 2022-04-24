@@ -1,11 +1,22 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+const authService = require("../../../data/services/auth-service");
 
 export default function Navbar() {
-  const [ cookies ] = useCookies();
+  const [ cookies, setCookie ] = useCookies();
 
   let navigate = useNavigate();
+
+  async function logoutUser() {
+    await authService.logoutUser().catch(error => {
+      return;
+    });
+
+    const today = new Date()
+    console.log(today)
+    setCookie('refreshedCookies', today, { path: window.location.host } )
+  }
 
   return (
     <div class="md:container md:mx-auto p-2">
@@ -37,7 +48,7 @@ export default function Navbar() {
                 {cookies.session && <li><h3>{cookies.session.name}</h3></li>}
               </ul>
             </div>
-            <a class = "btn btn-primary ml-2" onClick={() => navigate(`/logout`)}>Logout</a>
+            <a class = "btn btn-primary ml-2" onClick={logoutUser}>Logout</a>
           </div>
         ):(
           <div class="navbar-end">

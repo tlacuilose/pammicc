@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from 'react-cookie';
+
 const authService = require("../../../data/services/auth-service");
 
 export default function LoginUserViewModel() {
@@ -19,6 +20,7 @@ export default function LoginUserViewModel() {
   async function loginUser() {
     await authService.loginUser(values).catch(error => {
       setError(error);
+      return;
     });
 
     const today = new Date()

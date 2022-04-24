@@ -29,7 +29,24 @@ userRoutes.route('/register').post((req, response, next) => {
         } else {
             db_connect.collection('users').updateOne({ _id: user._id }, { $set: { role: 'project_uploader' } })
             .then(() => {
-                response.status(200).send({ message: info.response });
+                try {
+                  req.login(user, { session: false }, async (error) => {
+                      if (error) return next(error);
+                      const body = { _id: user._id, email: user.email , role: user.role};
+                      const token = jwt.sign({ user: body }, 'TOP_SECRET');  //change TOP_SECRET for env variable in prod
+                      response.cookie('session', user, {
+                          httpOnly: false,
+                          maxAge: 9000000,
+                      })
+                      response.cookie('jwt', token, {
+                          httpOnly: false,
+                          maxAge: 9000000,
+                      })
+                      .send('Auth cookie created ' + token);
+                  });
+                } catch (err) {
+                  return next(err)
+                }
             })
             .catch((err) => res.status(500).send(err));
         };

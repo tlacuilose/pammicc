@@ -16,7 +16,7 @@ class User {
       throw new Error("Cant have a user without a name or a last name.");
     }
     if (!emailFilter.test(this.email)) {
-      throw new Error("Please provide a valid email.")
+      throw new Error("Please provide a valid email.");
     }
     if (this.password.length < 8) {
       throw new Error("Cant have a password of less than 8 characters.");
@@ -40,14 +40,14 @@ async function login(user) {
   })
 
   if (response.status == 401)  {
-    throw new Error("Please provide a valid email and password combination.")
+    throw new Error("Please provide a valid email and password combination.");
   }
 
   if (!response.ok) {
-    throw new Error("An error ocurred login user.")
+    throw new Error("An error ocurred login user.");
   }
 
-  return response
+  return response;
 }
 
 async function register(newUser) {
@@ -66,16 +66,39 @@ async function register(newUser) {
   })
 
   if (response.status == 409) {
-    throw new Error("This email is already registered.")
+    throw new Error("This email is already registered.");
   }
 
   if (!response.ok) {
-    throw new Error("An error ocurred registering user.")
+    throw new Error("An error ocurred registering user.");
   }
 
-  return response
+  return response;
 }
 
+async function logout() {
+  const response = await fetch(`${server_url}/logout`, {
+    method: "GET",
+    headers: {
+      "Access-Control-Allow-Origin": window.location.host,
+      "Access-Control-Allow-Credentials": true,
+    },
+    credentials: 'include',
+  })
+  .catch(error => {
+    throw error;
+  })
+
+  if (response.status == 409) {
+    throw new Error("This email is already registered.");
+  }
+
+  if (!response.ok) {
+    throw new Error("An error ocurred registering user.");
+  }
+
+  return response;
+}
 
 export async function loginUser(values) {
   try {
@@ -85,11 +108,11 @@ export async function loginUser(values) {
       null,
       values.email,
       values.password
-    )
+    );
 
-    user.validate()
+    user.validate();
 
-    const response = await login(user)
+    const response = await login(user);
     return response;
   } catch (error) {
     throw new error;
@@ -104,12 +127,21 @@ export async function registerUser(values) {
       values.lastName,
       values.email,
       values.password
-    )
+    );
 
-    newUser.validate()
+    newUser.validate();
 
-    const response = await register(newUser)
+    const response = await register(newUser);
     return response;
+  } catch (error) {
+    throw new error;
+  }
+}
+
+export async function logoutUser() {
+  try {
+    const response = await logout();
+    return response
   } catch (error) {
     throw new error;
   }
