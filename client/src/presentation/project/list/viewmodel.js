@@ -6,12 +6,12 @@ export default function ProjectListViewModel() {
   const [projects, setProjects] = useState([]);
 
   async function getProjects() {
-    const {result, error} = await repo.getProjects();
+    const { result, error } = await repo.getProjects();
     setError(error);
     setProjects(result);
   }
 
-  return { 
+  return {
     projects,
     error,
     getProjects
