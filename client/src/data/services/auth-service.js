@@ -43,6 +43,8 @@ async function login(user) {
   if (!response.ok) {
     throw new Error("An error ocurred login user.")
   }
+
+  return response
 }
 
 async function register(newUser) {
@@ -64,6 +66,8 @@ async function register(newUser) {
   if (!response.ok) {
     throw new Error("An error ocurred registering user.")
   }
+
+  return response
 }
 
 
@@ -79,10 +83,10 @@ export async function loginUser(values) {
 
     user.validate()
 
-    await login(user)
-    return null;
+    const response = await login(user)
+    return response;
   } catch (error) {
-    return error;
+    throw new error;
   }
 }
 
@@ -98,9 +102,9 @@ export async function registerUser(values) {
 
     newUser.validate()
 
-    await register(newUser)
-    return null;
+    const response = await register(newUser)
+    return response;
   } catch (error) {
-    return error;
+    throw new error;
   }
 }
