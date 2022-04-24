@@ -367,7 +367,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
-:root {
+:root,
+[data-theme] {
   background-color: hsla(var(--b1) / var(--tw-bg-opacity, 1));
   color: hsla(var(--bc) / var(--tw-text-opacity, 1));
 }
@@ -663,6 +664,7 @@ html {
   font-weight: 600;
   text-transform: uppercase;
   text-transform: var(--btn-text-case, uppercase);
+  text-decoration-line: none;
   border-width: var(--border-btn, 1px);
   animation: button-pop var(--animation-btn, 0.25s) ease-out;
   --tw-border-opacity: 1;
@@ -673,11 +675,6 @@ html {
 }
 .btn-disabled, .btn[disabled] {
   pointer-events: none;
-  --tw-border-opacity: 0;
-  background-color: hsl(var(--n) / var(--tw-bg-opacity));
-  --tw-bg-opacity: 0.2;
-  color: hsl(var(--bc) / var(--tw-text-opacity));
-  --tw-text-opacity: 0.2;
 }
 .btn.loading, .btn.loading:hover {
   pointer-events: none;
@@ -1147,6 +1144,13 @@ html {
   --tw-text-opacity: 1;
   color: hsl(var(--pc) / var(--tw-text-opacity));
 }
+.btn-disabled, .btn-disabled:hover, .btn[disabled], .btn[disabled]:hover {
+  --tw-border-opacity: 0;
+  background-color: hsl(var(--n) / var(--tw-bg-opacity));
+  --tw-bg-opacity: 0.2;
+  color: hsl(var(--bc) / var(--tw-text-opacity));
+  --tw-text-opacity: 0.2;
+}
 .btn.loading.btn-square:before, .btn.loading.btn-circle:before {
   margin-right: 0px;
 }
@@ -1299,7 +1303,7 @@ html {
   --tw-border-opacity: 1;
   border-color: hsl(var(--p) / var(--tw-border-opacity));
 }
-.menu[class*="p-"] li > * {
+.menu[class*=" p-"] li > *, .menu[class^="p-"] li > * {
   border-radius: var(--rounded-btn, 0.5rem);
 }
 .menu :where(li.bordered > *) {
@@ -1406,7 +1410,7 @@ html {
 .menu > :where(li) > :where(ul) :where(li) :where(ul) {
   padding-left: 1rem;
 }
-.menu > :where(li) > :where(ul) :where(li) :where(:not(ul)) {
+.menu > :where(li) > :where(ul) :where(li) > :where(:not(ul)) {
   width: 100%;
   white-space: nowrap;
 }

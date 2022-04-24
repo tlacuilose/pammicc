@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-const repo = require("../../../data/repositories/projects-repository");
+import { useCookies } from 'react-cookie';
+
+const authService = require("../../../data/services/auth-service");
 
 export default function LoginUserViewModel() {
   const navigate = useNavigate();
@@ -9,18 +11,24 @@ export default function LoginUserViewModel() {
     email: "",
     password: ""
   });
+  const [ cookies, setCookie ] = useCookies()
 
   function onChange(event) {
     setValues({...values, [event.target.name]: event.target.value});
   }
 
   async function loginUser() {
-    const error = await repo.loginUser(values);
-    if (error) {
+    await authService.loginUser(values).catch(error => {
       setError(error);
-    } else {
-      navigate(`/`);
-    }
+      return;
+    });
+
+    const today = new Date()
+    console.log(today)
+
+    setCookie('refreshedCookies', today, { path: window.location.host } )
+
+    navigate(`/`);
   }
 
   return {
