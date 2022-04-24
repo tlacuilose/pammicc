@@ -14,7 +14,6 @@ export default function Navbar() {
     });
 
     const today = new Date()
-    console.log(today)
     setCookie('refreshedCookies', today, { path: window.location.host } )
   }
 

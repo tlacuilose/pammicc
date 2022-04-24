@@ -18,17 +18,17 @@ export default function LoginUserViewModel() {
   }
 
   async function loginUser() {
-    await authService.loginUser(values).catch(error => {
+    try {
+      await authService.loginUser(values)
+
+      const today = new Date()
+
+      setCookie('refreshedCookies', today, { path: window.location.host } )
+
+      navigate(`/`);
+    } catch (error) {
       setError(error);
-      return;
-    });
-
-    const today = new Date()
-    console.log(today)
-
-    setCookie('refreshedCookies', today, { path: window.location.host } )
-
-    navigate(`/`);
+    }
   }
 
   return {
