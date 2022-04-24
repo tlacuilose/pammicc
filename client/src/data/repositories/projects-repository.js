@@ -16,29 +16,6 @@ class Project {
   }
 }
 
-var emailFilter = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-
-class User {
-  constructor (id, name, lastName, email, password) {
-    this.id = id;
-    this.name = name;
-    this.lastName = lastName;
-    this.email = email;
-    this.password = password;
-  }
-
-  validate() {
-    if ((this.name != null && this.name === "") || (this.name != null && this.lastName === "")) {
-      throw new Error("Cant have a user without a name or a last name.");
-    }
-    if (!emailFilter.test(this.email)) {
-      throw new Error("Please provide a valid email.")
-    }
-    if (this.password.length < 8) {
-      throw new Error("Cant have a password of less than 8 characters.");
-    }
-  }
-}
 
 export async function getProjects() {
   try {
@@ -91,40 +68,3 @@ export async function addNewProject(values) {
   }
 }
 
-export async function loginUser(values) {
-  try {
-    const user = new User(
-      null,
-      null,
-      null,
-      values.email,
-      values.password
-    )
-
-    user.validate()
-
-    await ds.login(user)
-    return null;
-  } catch (error) {
-    return error;
-  }
-}
-
-export async function registerUser(values) {
-  try {
-    const newUser = new User(
-      null,
-      values.name,
-      values.lastName,
-      values.email,
-      values.password
-    )
-
-    newUser.validate()
-
-    await ds.register(newUser)
-    return null;
-  } catch (error) {
-    return error;
-  }
-}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-const repo = require("../../../data/repositories/projects-repository");
+const authService = require("../../../data/services/auth-service");
 
 export default function LoginUserViewModel() {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ export default function LoginUserViewModel() {
   }
 
   async function loginUser() {
-    const error = await repo.loginUser(values);
+    const error = await authService.loginUser(values);
     if (error) {
       setError(error);
     } else {

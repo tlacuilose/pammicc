@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-const repo = require("../../../data/repositories/projects-repository");
+const authService = require("../../../data/services/auth-service");
 
 export default function SignupUserViewModel() {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ export default function SignupUserViewModel() {
   }
 
   async function registerUser() {
-    const error = await repo.registerUser(values);
+    const error = await authService.registerUser(values);
     if (error) {
       setError(error);
     } else {
