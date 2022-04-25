@@ -17,7 +17,7 @@ export default function ProjectList() {
   }, []);
 
   return (
-    <div class="md:container md:mx-auto p-2">
+    <div class="md:container md:mx-auto p-2 pb-8">
       {error ?
         <ErrorAlert message="Failed to fetch projects" />
         :

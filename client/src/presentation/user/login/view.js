@@ -6,14 +6,14 @@ export default function LoginUser() {
   const {loginUser, email, password, onChange, error} = LoginUserViewModel();
 
   return (
-    <div class="md:container md:mx-auto p-2">
+    <div class="md:container md:mx-auto p-2 min-h-[80vh] sm:min-h-[90vh]">
       {error &&
         <ErrorAlert message={error.message} />
       }
-      <div class="hero-content flex-col lg:flex-row-reverse py-24 sm:px-24">
+      <div class="hero-content flex-col lg:flex-row-reverse py-8 md:py-24 sm:px-24">
         <div class="text-center lg:text-left">
           <h1 class="text-5xl font-bold">Login now!</h1>
-          <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+          <p class="py-6">Pammic is the perfect solution for citizen science projects! It's easy to use and helps to keep track of project maturity.</p>
         </div>
         <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <div class="card-body">

@@ -10,7 +10,7 @@ import SignupUser from "./presentation/user/signup/view";
 
 const App = () => {
   return (
-    <div>
+    <div class="bg-base-300">
       <Navbar />
       <Routes>
         <Route exact path="/" element={<ProjectList />} />

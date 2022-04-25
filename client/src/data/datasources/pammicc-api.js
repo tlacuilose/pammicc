@@ -75,3 +75,22 @@ export async function updateProject(oldProject, id) {
     throw new Error("An error ocurred adding the project.")
   }
 }
+
+export async function deleteProject(id) {
+  const response = await fetch(`${server_url}/projects/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Access-Control-Allow-Origin": window.location.host,
+      "Access-Control-Allow-Credentials": true,
+      "Content-Type": "application/json",
+    },
+    credentials: 'include',
+  })
+  .catch(error => {
+    throw error;
+  })
+
+  if (!response.ok) {
+    throw new Error("An error ocurred deleting the project.")
+  }
+}

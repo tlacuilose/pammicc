@@ -6,14 +6,14 @@ export default function SignupUser() {
   const {registerUser, name, lastName, email, password, onChange, error} = SignupUserViewModel();
 
   return (
-    <div class="md:container md:mx-auto p-2">
+    <div class="md:container md:mx-auto p-2 min-h-[90vh]">
       {error &&
         <ErrorAlert message={error.message} />
       }
-      <div class="hero-content flex-col lg:flex-row-reverse py-20 sm:px-32">
+      <div class="hero-content flex-col lg:flex-row-reverse py-4 md:py-20 sm:px-32">
         <div class="text-center lg:text-left">
           <h1 class="text-5xl font-bold">Register now!</h1>
-          <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+          <p class="py-6">The Pammic platform is an amazing resource for anyone looking to get involved in citizen science projects! The site provides a wealth of information on each project, detailing the maturity level of each project and what skills are needed to participate. This makes it easy for anyone to find a project that fits their needs and get started!</p>
         </div>
         <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <div class="card-body">
