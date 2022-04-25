@@ -46,7 +46,6 @@ secureRoutes.route("/projects/new").post(function (req, response) {
 
 // Update a project by id.
 secureRoutes.route("/projects/:id").put(function (req, response) {
-  console.log("Trying put");
   var token = null;
   if (req && req.cookies) token = req.cookies['jwt'];
   jsonPayload = parseJwt(token);
@@ -63,8 +62,6 @@ secureRoutes.route("/projects/:id").put(function (req, response) {
       .collection("projects")
       .findOne(id_query, function (err, result) {
         if (err) throw err;
-        console.log("updating project"  + req.params.id)
-        console.log(result);
         if (result.userid != user_id) {
           return response.status(401).send('No auth');
         } else {
@@ -89,14 +86,37 @@ secureRoutes.route("/projects/:id").put(function (req, response) {
 });
 
 // Delete a project
-secureRoutes.route("projects/:id").delete(function (req, response) {
-  let db_connect = dbo.getDb();
-  let id_query = { _id: ObjectId( req.params.id )};
-  db_connect.collection("projects").deleteOne(id_query, function (err, obj) {
-    if (err) throw err;
-    console.log("1 document deleted");
-    response.json(obj);
-  });
+secureRoutes.route("/projects/:id").delete(function (req, response) {
+  var token = null;
+  if (req && req.cookies) token = req.cookies['jwt'];
+  jsonPayload = parseJwt(token);
+
+  // Check that the user is project_uploader.
+  role = jsonPayload.user.role;
+  user_id = jsonPayload.user._id;
+  if(role!="project_uploader") {
+    response.status(403).send({ message: "Response has been declined" });
+  }else{
+    let db_connect = dbo.getDb();
+    let id_query = { _id: ObjectId( req.params.id )};
+    db_connect
+      .collection("projects")
+      .findOne(id_query, function (err, result) {
+        if (err) throw err;
+        console.log("updating project"  + req.params.id)
+        if (result.userid != user_id) {
+          return response.status(401).send('No auth');
+        } else {
+          let db_connect = dbo.getDb();
+          let id_query = { _id: ObjectId( req.params.id )};
+          db_connect.collection("projects").deleteOne(id_query, function (err, obj) {
+            if (err) throw err;
+            console.log("1 document deleted");
+            response.json(obj);
+          });
+        }
+      });
+  }
 });
 
 secureRoutes.route("/admin/test").get(function(req,response){
