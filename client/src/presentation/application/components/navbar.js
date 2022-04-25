@@ -9,57 +9,59 @@ export default function Navbar() {
   let navigate = useNavigate();
 
   async function logoutUser() {
-    await authService.logoutUser().catch(error => {
-      return;
-    });
+    try {
+      await authService.logoutUser()
 
-    const today = new Date()
-    console.log(today)
-    setCookie('refreshedCookies', today, { path: window.location.host } )
+      const today = new Date()
+      setCookie('refreshedCookies', today, { path: window.location.host } )
+    } catch (error) {
+      return
+    }
   }
 
   return (
-    <div class="md:container md:mx-auto p-2">
-      <div class="navbar bg-base-100 rounded-lg drop-shadow-md">
-        <div class="navbar-start">
-          <div class="dropdown">
-            <label tabindex="0" class="btn btn-ghost lg:hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-            </label>
-            <ul tabindex="0" class="dropdown-content menu menu-compact mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-              <li><a onClick={() => navigate(`/`)}>Catalog</a></li>
-              { cookies.jwt && <li><a class="btn btn-link" onClick={() => navigate(`/new`)}>Add Project</a></li>}
-            </ul>
+    <div>
+      <div class="md:container md:mx-auto p-2">
+        <div class="navbar bg-base-100 rounded-lg drop-shadow-md">
+          <div class="navbar-start">
+            <button class="btn btn-ghost normal-case text-xl" onClick={() => navigate(`/`)}>Pammicc</button>
+            <div class="hidden md:flex">
+              <ul class="menu menu-horizontal p-0 pl-2">
+                <li><button onClick={() => navigate(`/`)}>Catalog</button></li>
+              </ul>
+              <ul class="menu menu-horizontal p-0 pl-2">
+                { cookies.jwt && <li><button class="btn btn-link text-primary" onClick={() => navigate(`/new`)}>Add Project</button></li>}
+              </ul>
+            </div>
           </div>
-          <a class="btn btn-ghost normal-case text-xl" onClick={() => navigate(`/`)}>Pammicc</a>
-          <div class="hidden lg:flex">
-            <ul class="menu menu-horizontal p-0 pl-2">
-              <li><a onClick={() => navigate(`/`)}>Catalog</a></li>
-            </ul>
-            <ul class="menu menu-horizontal p-0 pl-2">
-              { cookies.jwt && <li><a class="btn btn-link" onClick={() => navigate(`/new`)}>Add Project</a></li>}
-            </ul>
+          {cookies.jwt ? (
+            <div class="navbar-end">
+              <div class="lg:flex">
+                <ul class="menu menu-horizontal p-0 pl-2">
+                  {cookies.session && <li><h3>{cookies.session.name}</h3></li>}
+                </ul>
+              </div>
+              <button class = "btn btn-primary ml-2" onClick={logoutUser}>Logout</button>
+            </div>
+          ):(
+            <div class="navbar-end">
+              <div class="lg:flex">
+                <ul class="menu menu-horizontal p-0 pl-2">
+                  <li><button onClick={() => navigate(`/login`)}>Login</button></li>
+                </ul>
+              </div>
+              <button class = "btn btn-primary ml-2" onClick={() => navigate(`/signup`)}>Sign up</button>
+            </div>
+          )}
+        </div>
+      </div>
+      <div class="md:container md:mx-auto p-2 md:hidden">
+        <div class="flex">
+          <div class="mx-auto">
+            <button onClick={() => navigate(`/`)}>Catalog</button>
+            { cookies.jwt && <button class="btn btn-link ml-2" onClick={() => navigate(`/new`)}>Add Project</button>}
           </div>
         </div>
-        {cookies.jwt ? (
-          <div class="navbar-end">
-            <div class="lg:flex">
-              <ul class="menu menu-horizontal p-0 pl-2">
-                {cookies.session && <li><h3>{cookies.session.name}</h3></li>}
-              </ul>
-            </div>
-            <a class = "btn btn-primary ml-2" onClick={logoutUser}>Logout</a>
-          </div>
-        ):(
-          <div class="navbar-end">
-            <div class="lg:flex">
-              <ul class="menu menu-horizontal p-0 pl-2">
-                <li><a onClick={() => navigate(`/login`)}>Login</a></li>
-              </ul>
-            </div>
-            <a class = "btn btn-primary ml-2" onClick={() => navigate(`/signup`)}>Sign up</a>
-          </div>
-        )}
       </div>
     </div>
   );

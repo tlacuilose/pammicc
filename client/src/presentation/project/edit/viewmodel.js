@@ -12,16 +12,29 @@ export default function EditProjectViewModel() {
     url: "",
     tags: ""
   });
-  const [ cookies, setCookie ] = useCookies();
+  const [ cookies ] = useCookies();
 
   function onChange(event) {
     setValues({...values, [event.target.name]: event.target.value});
   }
 
-  async function saveProject() {
+  async function getProjectInfo(id) {
     try {
-      const userid = cookies.session._id
-      const error = await repo.addNewProject(values, userid);
+      let project = await repo.getProject(id);
+      setValues({...values,
+        name: project.name,
+        description: project.description,
+        url: project.url,
+        tags: project.tags
+      });
+    } catch (error) {
+      setError(error)
+    }
+  }
+
+  async function updateProject(id) {
+    try {
+      const error = await repo.updateProject(values, id);
       if (error) {
         setError(error);
       } else {
@@ -37,7 +50,9 @@ export default function EditProjectViewModel() {
     ...values,
     error,
     onChange,
-    saveProject
+    updateProject,
+    getProjectInfo
   }
 
 }
+

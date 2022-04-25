@@ -115,7 +115,7 @@ export async function loginUser(values) {
     const response = await login(user);
     return response;
   } catch (error) {
-    throw new error;
+    throw error;
   }
 }
 
@@ -134,7 +134,7 @@ export async function registerUser(values) {
     const response = await register(newUser);
     return response;
   } catch (error) {
-    throw new error;
+    throw error;
   }
 }
 
@@ -143,6 +143,6 @@ export async function logoutUser() {
     const response = await logout();
     return response
   } catch (error) {
-    throw new error;
+    throw error;
   }
 }

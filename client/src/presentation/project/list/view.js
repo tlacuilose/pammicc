@@ -5,11 +5,6 @@ import ProjectCard from "./components/projectcard";
 import ProjectDetail from "./components/projectDetail"
 import Modal from '@mui/material/Modal';
 
-
-// function showDetails() {
-//   console.log("click")
-// }
-
 export default function ProjectList() {
   const { projects, error, getProjects } = ProjectListViewModel();
   const [open, setOpen] = React.useState(false);
