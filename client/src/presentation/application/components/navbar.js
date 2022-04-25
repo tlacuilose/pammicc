@@ -9,12 +9,14 @@ export default function Navbar() {
   let navigate = useNavigate();
 
   async function logoutUser() {
-    await authService.logoutUser().catch(error => {
-      return;
-    });
+    try {
+      await authService.logoutUser()
 
-    const today = new Date()
-    setCookie('refreshedCookies', today, { path: window.location.host } )
+      const today = new Date()
+      setCookie('refreshedCookies', today, { path: window.location.host } )
+    } catch (error) {
+      return
+    }
   }
 
   return (

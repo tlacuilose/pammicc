@@ -34,7 +34,7 @@ userRoutes.route('/register').post((req, response, next) => {
                       if (error) return next(error);
                       const body = { _id: user._id, email: user.email , role: user.role};
                       const token = jwt.sign({ user: body }, 'TOP_SECRET');  //change TOP_SECRET for env variable in prod
-                      response.cookie('session', user, {
+                      response.cookie('session', body, {
                           httpOnly: false,
                           maxAge: 9000000,
                       })
@@ -72,7 +72,7 @@ userRoutes.route('/login').post((req, response, next) => {
                 if (error) return next(error);
                 const body = { _id: user._id, email: user.email , role: user.role};
                 const token = jwt.sign({ user: body }, 'TOP_SECRET');  //change TOP_SECRET for env variable in prod
-                response.cookie('session', user, {
+                response.cookie('session', body, {
                     httpOnly: false,
                     maxAge: 9000000,
                 })

@@ -22,7 +22,7 @@ export default function TagsList(props) {
         continue;
       }
       let colorI = i % colors.length;
-      elements.push(<div class={"mr-1 badge " + colors[colorI]}>{tags[i]}</div>)
+      elements.push(<div key={i} class={"mr-1 whitespace-nowrap badge " + colors[colorI]}>{tags[i]}</div>)
     }
     return elements
   }

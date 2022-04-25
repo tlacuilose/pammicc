@@ -1,17 +1,21 @@
 const ds = require("../datasources/pammicc-api");
 
 class Project {
-  constructor (id, name, description, url, tags) {
+  constructor (id, name, description, url, tags, userid) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.url = url;
     this.tags = tags;
+    this.userid = userid;
   }
 
   validate() {
     if (this.name === "") {
       throw new Error("Cant upload a project without a name.");
+    }
+    if (this.userid === "") {
+      throw new Error("Can't upload project, authentication error.");
     }
   }
 }
@@ -29,7 +33,8 @@ export async function getProjects() {
             project.name,
             project.description,
             project.url,
-            project.tags
+            project.tags,
+            project.userid
           )
         )
       });
@@ -50,14 +55,15 @@ export async function getProjects() {
   }
 }
 
-export async function addNewProject(values) {
+export async function addNewProject(values, userid) {
   try {
     const newProject = new Project(
       null,
       values.name,
       values.description,
       values.url,
-      values.tags
+      values.tags,
+      userid
     );
     newProject.validate();
 
