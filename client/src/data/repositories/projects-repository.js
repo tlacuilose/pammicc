@@ -37,6 +37,7 @@ export async function getProjects() {
             project.userid
           )
         )
+        return project
       });
       return {
         result: projects,
@@ -107,6 +108,14 @@ export async function updateProject(values, id) {
     return null;
   } catch (error) {
     return error;
+  }
+}
+
+export async function deleteProject(id) {
+  try {
+    await ds.deleteProject(id);
+  } catch (error) {
+    throw error;
   }
 }
 

@@ -28,7 +28,7 @@ export default function TagsList(props) {
   }
 
   return (
-    <div>
+    <div class="h-24 overflow-hidden">
       {tagsList}
     </div>
   );

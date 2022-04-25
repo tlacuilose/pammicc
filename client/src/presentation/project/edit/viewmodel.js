@@ -58,6 +58,7 @@ export default function EditProjectViewModel() {
   return {
     ...values,
     error,
+    setError,
     onChange,
     updateProject,
     getProjectInfo,

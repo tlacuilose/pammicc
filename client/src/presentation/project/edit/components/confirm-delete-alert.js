@@ -1,6 +1,19 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { deleteProject } from "../../../../data/repositories/projects-repository";
 
 export default function ConfirmDeleteAlert(props) {
+  let navigate = useNavigate();
+
+  async function confirmDelete() {
+    try {
+      await deleteProject(props.project_id);
+
+      navigate(`/`);
+    } catch (error) {
+      props.setError(error);
+    }
+  }
   return (
     <div class="alert alert-warning shadow-lg">
       <div>
@@ -9,7 +22,7 @@ export default function ConfirmDeleteAlert(props) {
       </div>
       <div class="flex-none">
         <button class="btn btn-sm btn-ghost" onClick={props.cancellation}>Cancel</button>
-        <button class="btn btn-sm btn-error">Delete</button>
+        <button class="btn btn-sm btn-error" onClick={confirmDelete}>Delete</button>
       </div>
     </div>
   );

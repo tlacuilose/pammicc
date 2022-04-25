@@ -17,9 +17,9 @@ export default function ProjectCard(props) {
   return (
     <div class="card bg-base-100 shadow-xl">
       <div class="card-body">
-        <h2 class="card-title">{props.project.name}</h2>
-        <p>{props.project.description.substring(0, 100) + "..."}</p>
-        <p>
+        <h2 class="card-title h-32 overflow-hidden">{props.project.name}</h2>
+        <p class="h-32 overflow-hidden">{props.project.description.substring(0, 100) + "..."}</p>
+        <p class="h-24 overflow-hidden">
           Project link:<br/>
           <a 
             class="link link-primary"

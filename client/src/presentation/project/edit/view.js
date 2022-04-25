@@ -8,7 +8,7 @@ import ConfirmDeleteAlert from "./components/confirm-delete-alert";
 
 export default function ProjectEdit() {
   const { id } =  useParams();
-  const {updateProject, getProjectInfo, name, description, url, tags, onChange, error, showConfirmDelete, askDelete, cancelDelete } = EditProjectViewModel(id);
+  const {updateProject, getProjectInfo, name, description, url, tags, onChange, error, setError, showConfirmDelete, askDelete, cancelDelete } = EditProjectViewModel(id);
 
   let navigate = useNavigate();
 
@@ -23,7 +23,7 @@ export default function ProjectEdit() {
   return (
     <div class="md:container md:mx-auto p-2">
       {showConfirmDelete &&
-        <ConfirmDeleteAlert project_id={id} cancellation={cancelDelete} />
+        <ConfirmDeleteAlert project_id={id} cancellation={cancelDelete} setError={setError}/>
       }
       {error &&
         <ErrorAlert message={error.message} />

@@ -1738,6 +1738,12 @@ html {
 .h-6 {
   height: 1.5rem;
 }
+.h-24 {
+  height: 6rem;
+}
+.h-32 {
+  height: 8rem;
+}
 .w-6 {
   width: 1.5rem;
 }
@@ -1785,11 +1791,18 @@ html {
 .gap-4 {
   gap: 1rem;
 }
+.overflow-hidden {
+  overflow: hidden;
+}
 .whitespace-nowrap {
   white-space: nowrap;
 }
 .rounded-lg {
   border-radius: 0.5rem;
+}
+.bg-base-300 {
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--b3, var(--b2)) / var(--tw-bg-opacity));
 }
 .bg-base-100 {
   --tw-bg-opacity: 1;
