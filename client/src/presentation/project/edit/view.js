@@ -5,11 +5,15 @@ import EditProjectViewModel from "./viewmodel";
 import ErrorAlert from "../../application/components/error-alert";
 import TagsList from "../../application/components/tags-list";
 
-export default function ProjectEdit(props) {
+export default function ProjectEdit() {
   const { id } =  useParams();
-  const {saveProject, getProjectInfo, name, description, url, tags, onChange, error } = EditProjectViewModel(id);
+  const {updateProject, getProjectInfo, name, description, url, tags, onChange, error } = EditProjectViewModel(id);
 
   let navigate = useNavigate();
+
+  function update() {
+    updateProject(id)
+  }
 
   useEffect(() => {
     getProjectInfo(id)
@@ -27,7 +31,7 @@ export default function ProjectEdit(props) {
               <h1 class="card-title text-3xl">Edit project</h1>
               <button
                 class="btn btn-active btn-accent mr-2"
-                onClick={saveProject}
+                onClick={update}
               >
                 Delete Project
               </button>
@@ -95,7 +99,7 @@ export default function ProjectEdit(props) {
                 </button>
                 <button
                   class="btn btn-wide btn-primary ml-2"
-                  onClick={saveProject}
+                  onClick={update}
                 >
                   Update
                 </button>

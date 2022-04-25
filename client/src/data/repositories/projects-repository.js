@@ -30,10 +30,10 @@ export async function getProjects() {
         projects.push(
           new Project(
             project._id,
-            project.name,
-            project.description,
-            project.url,
-            project.tags,
+            project.name || "" ,
+            project.description || "",
+            project.url || "",
+            project.tags || "",
             project.userid
           )
         )
@@ -60,10 +60,10 @@ export async function getProject(id) {
     const response = await ds.getProject(id);
     const project = new Project(
       response._id,
-      response.name,
-      response.description,
-      response.url,
-      response.tags,
+      response.name || "",
+      response.description || "",
+      response.url || "",
+      response.tags || "",
       response.userid
     );
     return project;
@@ -85,6 +85,25 @@ export async function addNewProject(values, userid) {
     newProject.validate();
 
     await ds.newProject(newProject);
+    return null;
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function updateProject(values, id) {
+  try {
+    const oldProject = new Project(
+      id,
+      values.name,
+      values.description,
+      values.url,
+      values.tags,
+      id
+    );
+    oldProject.validate();
+
+    await ds.updateProject(oldProject, id);
     return null;
   } catch (error) {
     return error;

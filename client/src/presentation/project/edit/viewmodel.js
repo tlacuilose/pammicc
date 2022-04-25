@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 const repo = require("../../../data/repositories/projects-repository");
 
-export default function NewProjectViewModel() {
+export default function EditProjectViewModel() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [values, setValues] = useState({
@@ -32,10 +32,9 @@ export default function NewProjectViewModel() {
     }
   }
 
-  async function saveProject() {
+  async function updateProject(id) {
     try {
-      const userid = cookies.session._id
-      const error = await repo.addNewProject(values, userid);
+      const error = await repo.updateProject(values, id);
       if (error) {
         setError(error);
       } else {
@@ -51,7 +50,7 @@ export default function NewProjectViewModel() {
     ...values,
     error,
     onChange,
-    saveProject,
+    updateProject,
     getProjectInfo
   }
 
