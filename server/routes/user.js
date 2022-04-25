@@ -13,6 +13,8 @@ const dbo = require("../db/conn")
 // Converts id from string to ObjectId
 const ObjectId = require("mongodb").ObjectId;
 
+const secretJWT = process.env.JWTSECRET;
+
 
 
 // Register
@@ -34,7 +36,7 @@ userRoutes.route('/register').post((req, response, next) => {
                       if (error) return next(error);
                       const body = { _id: user._id, email: user.email , role: 'project_uploader'};
                       const safeUser = { _id: user._id, name: user.name, email: user.email , role: 'project_uploader'};
-                      const token = jwt.sign({ user: body }, 'TOP_SECRET');  //change TOP_SECRET for env variable in prod
+                      const token = jwt.sign({ user: body }, secretJWT);
                       response.cookie('session', safeUser, {
                           httpOnly: false,
                           maxAge: 9000000,
@@ -73,7 +75,7 @@ userRoutes.route('/login').post((req, response, next) => {
                 if (error) return next(error);
                 const body = { _id: user._id, email: user.email , role: user.role};
                 const safeUser = { _id: user._id, name: user.name, email: user.email , role: user.role};
-                const token = jwt.sign({ user: body }, 'TOP_SECRET');  //change TOP_SECRET for env variable in prod
+                const token = jwt.sign({ user: body }, secretJWT);
                 response.cookie('session', safeUser, {
                     httpOnly: false,
                     maxAge: 9000000,

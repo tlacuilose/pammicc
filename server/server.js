@@ -20,6 +20,9 @@ const secureRoutes = require("./routes/secure-routes");
 // Get Port from .env
 const port = process.env.PORT;
 
+// Get allowed origin
+const allowedOrigin = process.env.ALLOWEDORIGIN;
+
 // Start express app.
 const app = express();
 
@@ -35,7 +38,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 var corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: allowedOrigin,
     credentials: true 
 };
 app.use(cors(corsOptions));
