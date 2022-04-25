@@ -4,10 +4,11 @@ import { useNavigate } from "react-router-dom";
 import EditProjectViewModel from "./viewmodel";
 import ErrorAlert from "../../application/components/error-alert";
 import TagsList from "../../application/components/tags-list";
+import ConfirmDeleteAlert from "./components/confirm-delete-alert";
 
 export default function ProjectEdit() {
   const { id } =  useParams();
-  const {updateProject, getProjectInfo, name, description, url, tags, onChange, error } = EditProjectViewModel(id);
+  const {updateProject, getProjectInfo, name, description, url, tags, onChange, error, showConfirmDelete, askDelete, cancelDelete } = EditProjectViewModel(id);
 
   let navigate = useNavigate();
 
@@ -21,6 +22,9 @@ export default function ProjectEdit() {
 
   return (
     <div class="md:container md:mx-auto p-2">
+      {showConfirmDelete &&
+        <ConfirmDeleteAlert project_id={id} cancellation={cancelDelete} />
+      }
       {error &&
         <ErrorAlert message={error.message} />
       }
@@ -31,7 +35,8 @@ export default function ProjectEdit() {
               <h1 class="card-title text-3xl">Edit project</h1>
               <button
                 class="btn btn-active btn-accent mr-2"
-                onClick={update}
+                disabled={showConfirmDelete}
+                onClick={askDelete}
               >
                 Delete Project
               </button>

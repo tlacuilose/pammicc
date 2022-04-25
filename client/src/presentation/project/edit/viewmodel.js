@@ -6,6 +6,7 @@ const repo = require("../../../data/repositories/projects-repository");
 export default function EditProjectViewModel() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const [ showConfirmDelete, setShowConfirmDelete] = useState(false)
   const [values, setValues] = useState({
     name: "",
     description: "",
@@ -46,12 +47,23 @@ export default function EditProjectViewModel() {
     }
   }
 
+  async function askDelete() {
+    setShowConfirmDelete(true)
+  }
+
+  async function cancelDelete() {
+    setShowConfirmDelete(false)
+  }
+
   return {
     ...values,
     error,
     onChange,
     updateProject,
-    getProjectInfo
+    getProjectInfo,
+    showConfirmDelete,
+    askDelete,
+    cancelDelete
   }
 
 }
