@@ -1,10 +1,19 @@
 import React, { useEffect } from "react";
+import { useParams } from 'react-router';
+import { useNavigate } from "react-router-dom";
 import EditProjectViewModel from "./viewmodel";
 import ErrorAlert from "../../application/components/error-alert";
 import TagsList from "../../application/components/tags-list";
 
-export default function ProjectEdit() {
-  const {saveProject, name, description, url, tags, onChange, error } = EditProjectViewModel();
+export default function ProjectEdit(props) {
+  const { id } =  useParams();
+  const {saveProject, getProjectInfo, name, description, url, tags, onChange, error } = EditProjectViewModel(id);
+
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    getProjectInfo(id)
+  }, []);
 
   return (
     <div class="md:container md:mx-auto p-2">
@@ -80,7 +89,7 @@ export default function ProjectEdit() {
               <div class="flex justify-end">
                 <button
                   class="btn mr-2"
-                  onClick={saveProject}
+                  onClick={()=>{navigate(`/`)}}
                 >
                   Cancel
                 </button>

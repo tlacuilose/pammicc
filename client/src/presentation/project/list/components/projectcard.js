@@ -8,7 +8,11 @@ export default function ProjectCard(props) {
 
   const isOwner = cookies.session && cookies.session._id == props.project.userid;
 
-  let navigate = useNavigate();
+  let navigate = useNavigate()
+
+  function navigateToEdit() {
+    navigate("/edit/" + props.project.userid)
+  }
 
   return (
     <div class="card bg-base-100 shadow-xl">
@@ -26,7 +30,7 @@ export default function ProjectCard(props) {
         </p>
         <TagsList tags={props.project.tags} />
         <div class="card-actions justify-end">
-          { isOwner && <button class="btn btn-active btn-secondary" onClick={()=>navigate(`/edit`)}>Edit</button>}
+          { isOwner && <button class="btn btn-active btn-secondary" onClick={navigateToEdit}>Edit</button>}
           <button class="btn btn-primary" onClick={()=>props.showDetails(props.project)}>View</button>
         </div>
       </div>

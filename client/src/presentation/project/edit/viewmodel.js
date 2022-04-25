@@ -12,10 +12,14 @@ export default function NewProjectViewModel() {
     url: "",
     tags: ""
   });
-  const [ cookies, setCookie ] = useCookies();
+  const [ cookies ] = useCookies();
 
   function onChange(event) {
     setValues({...values, [event.target.name]: event.target.value});
+  }
+
+  async function getProjectInfo(id) {
+    console.log(id)
   }
 
   async function saveProject() {
@@ -37,7 +41,8 @@ export default function NewProjectViewModel() {
     ...values,
     error,
     onChange,
-    saveProject
+    saveProject,
+    getProjectInfo
   }
 
 }
