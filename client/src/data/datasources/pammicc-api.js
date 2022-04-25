@@ -18,6 +18,24 @@ export async function getProjects () {
   return json;
 }
 
+export async function getProject (id) {
+  const response = await fetch(`${server_url}/projects/${id}`).catch(error => {
+    throw error;
+  });
+
+  if (!response.ok) {
+    throw new Error("An error ocurred fetching project");
+  }
+
+  const json = await response.json();
+  
+  if (!json) {
+    throw new Error("An error occured getting json data from fetching project.");
+  }
+
+  return json;
+}
+
 export async function newProject(newProject) {
   const response = await fetch(`${server_url}/projects/new`, {
     method: "POST",

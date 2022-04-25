@@ -19,7 +19,17 @@ export default function NewProjectViewModel() {
   }
 
   async function getProjectInfo(id) {
-    console.log(id)
+    try {
+      let project = await repo.getProject(id);
+      setValues({...values,
+        name: project.name,
+        description: project.description,
+        url: project.url,
+        tags: project.tags
+      });
+    } catch (error) {
+      setError(error)
+    }
   }
 
   async function saveProject() {

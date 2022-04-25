@@ -55,6 +55,23 @@ export async function getProjects() {
   }
 }
 
+export async function getProject(id) {
+  try {
+    const response = await ds.getProject(id);
+    const project = new Project(
+      response._id,
+      response.name,
+      response.description,
+      response.url,
+      response.tags,
+      response.userid
+    );
+    return project;
+  } catch (e) {
+    throw e;
+  }
+}
+
 export async function addNewProject(values, userid) {
   try {
     const newProject = new Project(

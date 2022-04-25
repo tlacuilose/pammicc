@@ -11,7 +11,7 @@ export default function ProjectCard(props) {
   let navigate = useNavigate()
 
   function navigateToEdit() {
-    navigate("/edit/" + props.project.userid)
+    navigate("/edit/" + props.project.id)
   }
 
   return (
