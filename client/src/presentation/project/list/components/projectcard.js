@@ -6,7 +6,7 @@ import { useCookies } from "react-cookie";
 export default function ProjectCard(props) {
   const [ cookies ] = useCookies();
 
-  const isOwner = cookies.session._id == props.project.userid;
+  const isOwner = cookies.session && cookies.session._id == props.project.userid;
 
   let navigate = useNavigate();
 

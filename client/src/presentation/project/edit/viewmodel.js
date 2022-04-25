@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 const repo = require("../../../data/repositories/projects-repository");
 
-export default function EditProjectViewModel() {
+export default function NewProjectViewModel() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [values, setValues] = useState({
@@ -41,3 +41,4 @@ export default function EditProjectViewModel() {
   }
 
 }
+
