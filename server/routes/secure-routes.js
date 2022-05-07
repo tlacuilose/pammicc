@@ -34,7 +34,7 @@ secureRoutes.route("/projects/new").post(function (req, response) {
         description: req.body.description,
         url: req.body.url,
         tags: req.body.tags,
-        userid: req.body.userid,
+        userid: jsonPayload.user._id
       };
       db_connect.collection("projects").insertOne(project, function (err, res) {
         if (err) throw err;

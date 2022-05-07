@@ -38,14 +38,18 @@ userRoutes.route('/register').post((req, response, next) => {
                       const safeUser = { _id: user._id, name: user.name, email: user.email , role: 'project_uploader'};
                       const token = jwt.sign({ user: body }, secretJWT);
                       response.cookie('session', safeUser, {
-                          httpOnly: false,
+                          httpOnly: true,
+                          sameSite: 'none',
+                          secure: true,
                           maxAge: 9000000,
                       })
                       response.cookie('jwt', token, {
-                          httpOnly: false,
+                          httpOnly: true,
+                          sameSite: 'none',
+                          secure: true,
                           maxAge: 9000000,
                       })
-                      .send('Auth cookie created ' + token);
+                      response.json({id: user._id, name: user.name, email: user.email})
                   });
                 } catch (err) {
                   return next(err)
@@ -53,6 +57,7 @@ userRoutes.route('/register').post((req, response, next) => {
             })
             .catch((err) => res.status(500).send(err));
         };
+
     })(req, response, next);
 });
 
@@ -77,14 +82,18 @@ userRoutes.route('/login').post((req, response, next) => {
                 const safeUser = { _id: user._id, name: user.name, email: user.email , role: user.role};
                 const token = jwt.sign({ user: body }, secretJWT);
                 response.cookie('session', safeUser, {
-                    httpOnly: false,
+                    httpOnly: true,
+                    sameSite: 'none',
+                    secure: true,
                     maxAge: 9000000,
                 })
                 response.cookie('jwt', token, {
-                    httpOnly: false,
+                    httpOnly: true,
+                    sameSite: 'none',
+                    secure: true,
                     maxAge: 9000000,
                 })
-                .send('Auth cookie created ' + token);
+                response.json({id: user._id, name: user.name, email: user.email})
             });
         } catch (err) {
             return next(err);

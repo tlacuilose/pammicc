@@ -22,13 +22,13 @@ export default function TagsList(props) {
         continue;
       }
       let colorI = i % colors.length;
-      elements.push(<div key={i} class={"mr-1 whitespace-nowrap badge " + colors[colorI]}>{tags[i]}</div>)
+      elements.push(<div key={i} className={"mr-1 whitespace-nowrap badge " + colors[colorI]}>{tags[i]}</div>)
     }
     return elements
   }
 
   return (
-    <div class="h-24 overflow-hidden">
+    <div className="h-24 overflow-x-scroll">
       {tagsList}
     </div>
   );

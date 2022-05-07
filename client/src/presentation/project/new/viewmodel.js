@@ -12,7 +12,6 @@ export default function EditProjectViewModel() {
     url: "",
     tags: ""
   });
-  const [ cookies, setCookie ] = useCookies();
 
   function onChange(event) {
     setValues({...values, [event.target.name]: event.target.value});
@@ -20,8 +19,7 @@ export default function EditProjectViewModel() {
 
   async function saveProject() {
     try {
-      const userid = cookies.session._id
-      const error = await repo.addNewProject(values, userid);
+      const error = await repo.addNewProject(values);
       if (error) {
         setError(error);
       } else {

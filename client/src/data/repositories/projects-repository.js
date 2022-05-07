@@ -14,9 +14,6 @@ class Project {
     if (this.name === "") {
       throw new Error("Cant upload a project without a name.");
     }
-    if (this.userid === "") {
-      throw new Error("Can't upload project, authentication error.");
-    }
   }
 }
 
@@ -73,7 +70,7 @@ export async function getProject(id) {
   }
 }
 
-export async function addNewProject(values, userid) {
+export async function addNewProject(values) {
   try {
     const newProject = new Project(
       null,
@@ -81,7 +78,7 @@ export async function addNewProject(values, userid) {
       values.description,
       values.url,
       values.tags,
-      userid
+      null
     );
     newProject.validate();
 

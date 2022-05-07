@@ -28,7 +28,7 @@ async function login(user) {
   const response = await fetch(`${server_url}/login`, {
     method: "POST",
     headers: {
-      "Access-Control-Allow-Origin": window.location.host,
+      "Access-Control-Allow-Origin": window.location.origin,
       "Access-Control-Allow-Credentials": true,
       "Content-Type": "application/json",
     },
@@ -54,7 +54,7 @@ async function register(newUser) {
   const response = await fetch(`${server_url}/register`, {
     method: "POST",
     headers: {
-      "Access-Control-Allow-Origin": window.location.host,
+      "Access-Control-Allow-Origin": window.location.origin,
       "Access-Control-Allow-Credentials": true,
       "Content-Type": "application/json",
     },
@@ -80,7 +80,7 @@ async function logout() {
   const response = await fetch(`${server_url}/logout`, {
     method: "GET",
     headers: {
-      "Access-Control-Allow-Origin": window.location.host,
+      "Access-Control-Allow-Origin": window.location.origin,
       "Access-Control-Allow-Credentials": true,
     },
     credentials: 'include',
@@ -141,6 +141,11 @@ export async function registerUser(values) {
 export async function logoutUser() {
   try {
     const response = await logout();
+
+    if (!response.ok) {
+      throw new Error("An error ocurred loging out a user.");
+    }
+
     return response
   } catch (error) {
     throw error;

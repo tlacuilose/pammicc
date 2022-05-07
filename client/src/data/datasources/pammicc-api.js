@@ -40,7 +40,7 @@ export async function newProject(newProject) {
   const response = await fetch(`${server_url}/projects/new`, {
     method: "POST",
     headers: {
-      "Access-Control-Allow-Origin": window.location.host,
+      "Access-Control-Allow-Origin": window.location.origin,
       "Access-Control-Allow-Credentials": true,
       "Content-Type": "application/json",
     },
@@ -60,7 +60,7 @@ export async function updateProject(oldProject, id) {
   const response = await fetch(`${server_url}/projects/${id}`, {
     method: "PUT",
     headers: {
-      "Access-Control-Allow-Origin": window.location.host,
+      "Access-Control-Allow-Origin": window.location.origin,
       "Access-Control-Allow-Credentials": true,
       "Content-Type": "application/json",
     },
@@ -80,7 +80,7 @@ export async function deleteProject(id) {
   const response = await fetch(`${server_url}/projects/${id}`, {
     method: "DELETE",
     headers: {
-      "Access-Control-Allow-Origin": window.location.host,
+      "Access-Control-Allow-Origin": window.location.origin,
       "Access-Control-Allow-Credentials": true,
       "Content-Type": "application/json",
     },

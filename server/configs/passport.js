@@ -3,6 +3,7 @@ const passport = require('passport');
 const PassportLocal = require('passport-local').Strategy;
 
 const JWTstrategy = require('passport-jwt').Strategy;
+const secretJWT = process.env.JWTSECRET;
 
 var cookieExtractor = function(req) {
     var token = null;
@@ -13,7 +14,7 @@ var cookieExtractor = function(req) {
 passport.use(
     new JWTstrategy(
     {
-        secretOrKey: 'TOP_SECRET',
+        secretOrKey: secretJWT,
         jwtFromRequest: cookieExtractor
     },
     async (token, done) => {
@@ -96,3 +97,4 @@ const signUpStrategy = new PassportLocal(
 passport.use('signUp', signUpStrategy);
 
 passport.initialize();
+

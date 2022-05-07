@@ -6,6 +6,7 @@ client/.env
 client/.envprod
 server/config.env
 server/.env
+server/.gitignore
 
 # dependencies
 client/node_modules

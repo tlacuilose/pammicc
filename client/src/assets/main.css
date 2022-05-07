@@ -1744,6 +1744,12 @@ html {
 .h-32 {
   height: 8rem;
 }
+.max-h-\[15vh\] {
+  max-height: 15vh;
+}
+.max-h-\[30vh\] {
+  max-height: 30vh;
+}
 .min-h-\[80vh\] {
   min-height: 80vh;
 }
@@ -1799,6 +1805,12 @@ html {
 }
 .overflow-hidden {
   overflow: hidden;
+}
+.overflow-y-auto {
+  overflow-y: auto;
+}
+.overflow-x-scroll {
+  overflow-x: scroll;
 }
 .whitespace-nowrap {
   white-space: nowrap;

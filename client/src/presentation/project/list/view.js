@@ -8,7 +8,11 @@ import Modal from '@mui/material/Modal';
 export default function ProjectList() {
   const { projects, error, getProjects } = ProjectListViewModel();
   const [open, setOpen] = React.useState(false);
-  const handleOpen = (project) => setOpen({ state: true, project: project });
+  const [openedProject, setOpenedProject] = React.useState(undefined);
+  const handleOpen = (project) => {
+    setOpen(true);
+    setOpenedProject(project);
+  }
   const handleClose = () => setOpen(false);
 
 
@@ -17,11 +21,11 @@ export default function ProjectList() {
   }, []);
 
   return (
-    <div class="md:container md:mx-auto p-2 pb-8">
+    <div className="md:container md:mx-auto p-2 pb-8">
       {error ?
         <ErrorAlert message="Failed to fetch projects" />
         :
-        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {projects.map((project) => {
             return <li key={project.id}><ProjectCard showDetails={handleOpen} project={project} /></li>
           })}
@@ -32,7 +36,7 @@ export default function ProjectList() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <ProjectDetail showDetails={{}} project={open.project} close={handleClose}/>
+        <ProjectDetail showDetails={{}} project={openedProject} close={handleClose}/>
 
       </Modal>
     </div>
