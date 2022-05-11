@@ -34,6 +34,14 @@ secureRoutes.route("/projects/new").post(function (req, response) {
         description: req.body.description,
         url: req.body.url,
         tags: req.body.tags,
+        ctxt_awareness: req.body.ctxt_awareness,
+        citzn_engmnt: req.body.citzn_engmnt,
+        infstctr_lvrage: req.body.infstctr_lvrage,
+        tech_innovation: req.body.tech_innovation,
+        ed_innovation: req.body.ed_innovation,
+        outreach_scale: req.body.outreach_scale,
+        ntwork_blding: req.body.ntwork_blding,
+        complex_thinking: req.body.complex_thinking,
         userid: jsonPayload.user._id
       };
       db_connect.collection("projects").insertOne(project, function (err, res) {
@@ -71,6 +79,14 @@ secureRoutes.route("/projects/:id").put(function (req, response) {
               description: req.body.description,
               url: req.body.url,
               tags: req.body.tags,
+              ctxt_awareness: req.body.ctxt_awareness,
+              citzn_engmnt: req.body.citzn_engmnt,
+              infstctr_lvrage: req.body.infstctr_lvrage,
+              tech_innovation: req.body.tech_innovation,
+              ed_innovation: req.body.ed_innovation,
+              outreach_scale: req.body.outreach_scale,
+              ntwork_blding: req.body.ntwork_blding,
+              complex_thinking: req.body.complex_thinking,
             },
           };
           db_connect
