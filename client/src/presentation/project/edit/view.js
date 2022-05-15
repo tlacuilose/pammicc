@@ -5,10 +5,26 @@ import EditProjectViewModel from "./viewmodel";
 import ErrorAlert from "../../application/components/error-alert";
 import TagsList from "../../application/components/tags-list";
 import ConfirmDeleteAlert from "./components/confirm-delete-alert";
+import MaturityTable from "../list/components/MaturityTable"
 
 export default function ProjectEdit() {
-  const { id } =  useParams();
-  const {updateProject, getProjectInfo, name, description, url, tags, onChange, error, setError, showConfirmDelete, askDelete, cancelDelete } = EditProjectViewModel(id);
+  const { id } = useParams();
+  const { updateProject, getProjectInfo, name, description, url, tags, ctxt_awareness, citzn_engmnt, infstctr_lvrage, tech_innovation, ed_innovation, outreach_scale, ntwork_blding, complex_thinking, onChange,onChangeComponent, error, setError, showConfirmDelete, askDelete, cancelDelete } = EditProjectViewModel(id);
+
+  const components = {
+    ctxt_awareness: ctxt_awareness,
+    citzn_engmnt: citzn_engmnt,
+    infstctr_lvrage: infstctr_lvrage,
+    tech_innovation: tech_innovation,
+    ed_innovation: ed_innovation,
+    outreach_scale: outreach_scale,
+    ntwork_blding: ntwork_blding,
+    complex_thinking: complex_thinking
+  }
+
+  const handleUpdateComponent = (component, newValue) => {
+    onChangeComponent(component, newValue)
+  }
 
   let navigate = useNavigate();
 
@@ -23,7 +39,7 @@ export default function ProjectEdit() {
   return (
     <div className="md:container md:mx-auto p-2">
       {showConfirmDelete &&
-        <ConfirmDeleteAlert project_id={id} cancellation={cancelDelete} setError={setError}/>
+        <ConfirmDeleteAlert project_id={id} cancellation={cancelDelete} setError={setError} />
       }
       {error &&
         <ErrorAlert message={error.message} />
@@ -94,11 +110,12 @@ export default function ProjectEdit() {
               />
             </div>
             <TagsList tags={tags} />
+            <MaturityTable project={components} editing={true} updateComponent={handleUpdateComponent} />
             <div className="form-control mt-6">
               <div className="flex justify-end">
                 <button
                   className="btn mr-2"
-                  onClick={()=>{navigate(`/`)}}
+                  onClick={() => { navigate(`/`) }}
                 >
                   Cancel
                 </button>

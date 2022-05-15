@@ -2,10 +2,25 @@ import React, { useEffect } from "react";
 import NewProjectViewModel from "./viewmodel";
 import ErrorAlert from "../../application/components/error-alert";
 import TagsList from "../../application/components/tags-list";
+import MaturityTable from "../list/components/MaturityTable"
 
 export default function ProjectNew() {
-  const {saveProject, name, description, url, tags, onChange, error } = NewProjectViewModel();
+  const { saveProject, name, description, url, tags, ctxt_awareness, citzn_engmnt, infstctr_lvrage, tech_innovation, ed_innovation, outreach_scale, ntwork_blding, complex_thinking, onChange, onChangeComponent, error } = NewProjectViewModel();
 
+  const components = {
+    ctxt_awareness: ctxt_awareness,
+    citzn_engmnt: citzn_engmnt,
+    infstctr_lvrage: infstctr_lvrage,
+    tech_innovation: tech_innovation,
+    ed_innovation: ed_innovation,
+    outreach_scale: outreach_scale,
+    ntwork_blding: ntwork_blding,
+    complex_thinking: complex_thinking
+  }
+
+  const handleUpdateComponent = (component, newValue) => {
+    onChangeComponent(component, newValue)
+  }
   return (
     <div className="md:container md:mx-auto p-2">
       {error &&
@@ -68,6 +83,7 @@ export default function ProjectNew() {
               />
             </div>
             <TagsList tags={tags} />
+            <MaturityTable project={components} editing={true} updateComponent={handleUpdateComponent} />
             <div className="form-control mt-6">
               <button
                 className="btn btn-primary"

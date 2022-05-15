@@ -5,7 +5,7 @@ const cors = require("cors");
 // Use dotenv to get environment variables.
 require("dotenv").config()
 // Get driver connection
-const dbo = require("./db/conn")
+const dbo =require("./db/conn")
 
 require('./configs/passport');
 

@@ -10,11 +10,23 @@ export default function EditProjectViewModel() {
     name: "",
     description: "",
     url: "",
-    tags: ""
+    tags: "",
+    ctxt_awareness: 0,
+    citzn_engmnt: 0,
+    infstctr_lvrage: 0,
+    tech_innovation: 0,
+    ed_innovation: 0,
+    outreach_scale: 0,
+    ntwork_blding: 0,
+    complex_thinking: 0
   });
 
   function onChange(event) {
-    setValues({...values, [event.target.name]: event.target.value});
+    setValues({ ...values, [event.target.name]: event.target.value });
+  }
+  
+  function onChangeComponent(component, newValue) {
+    setValues({ ...values, [component]: newValue })
   }
 
   async function saveProject() {
@@ -35,6 +47,7 @@ export default function EditProjectViewModel() {
     ...values,
     error,
     onChange,
+    onChangeComponent,
     saveProject
   }
 

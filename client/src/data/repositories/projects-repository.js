@@ -1,18 +1,29 @@
 const ds = require("../datasources/pammicc-api");
 
 class Project {
-  constructor (id, name, description, url, tags, userid) {
+  constructor(id, name, description, url, tags, userid, ctxt_awareness, citzn_engmnt, infstctr_lvrage, tech_innovation, ed_innovation, outreach_scale, ntwork_blding, complex_thinking) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.url = url;
     this.tags = tags;
     this.userid = userid;
+    this.ctxt_awareness = ctxt_awareness;
+    this.citzn_engmnt = citzn_engmnt;
+    this.infstctr_lvrage = infstctr_lvrage;
+    this.tech_innovation = tech_innovation;
+    this.ed_innovation = ed_innovation;
+    this.outreach_scale = outreach_scale;
+    this.ntwork_blding = ntwork_blding;
+    this.complex_thinking = complex_thinking;
   }
 
   validate() {
     if (this.name === "") {
       throw new Error("Cant upload a project without a name.");
+    }
+    if (!this.ctxt_awareness || !this.citzn_engmnt || !this.infstctr_lvrage || !this.tech_innovation || !this.ed_innovation || !this.outreach_scale || !this.ntwork_blding || !this.complex_thinking) {
+      throw new Error("Cant upload a project missing component evaluation")
     }
   }
 }
@@ -23,15 +34,23 @@ export async function getProjects() {
     let projects = [];
     const response = await ds.getProjects();
     if (Array.isArray(response)) {
-      response.map( project => {
+      response.map(project => {
         projects.push(
           new Project(
             project._id,
-            project.name || "" ,
+            project.name || "",
             project.description || "",
             project.url || "",
             project.tags || "",
-            project.userid
+            project.userid,
+            project.ctxt_awareness || 0,
+            project.citzn_engmnt || 0,
+            project.infstctr_lvrage || 0,
+            project.tech_innovation || 0,
+            project.ed_innovation || 0,
+            project.outreach_scale || 0,
+            project.ntwork_blding || 0,
+            project.complex_thinking || 0,
           )
         )
         return project
@@ -62,7 +81,15 @@ export async function getProject(id) {
       response.description || "",
       response.url || "",
       response.tags || "",
-      response.userid
+      response.userid,
+      response.ctxt_awareness || 0,
+      response.citzn_engmnt || 0,
+      response.infstctr_lvrage || 0,
+      response.tech_innovation || 0,
+      response.ed_innovation || 0,
+      response.outreach_scale || 0,
+      response.ntwork_blding || 0,
+      response.complex_thinking || 0
     );
     return project;
   } catch (e) {
@@ -78,7 +105,15 @@ export async function addNewProject(values) {
       values.description,
       values.url,
       values.tags,
-      null
+      null,
+      values.ctxt_awareness,
+      values.citzn_engmnt,
+      values.infstctr_lvrage,
+      values.tech_innovation,
+      values.ed_innovation,
+      values.outreach_scale,
+      values.ntwork_blding,
+      values.complex_thinking
     );
     newProject.validate();
 
@@ -97,7 +132,15 @@ export async function updateProject(values, id) {
       values.description,
       values.url,
       values.tags,
-      id
+      id,
+      values.ctxt_awareness,
+      values.citzn_engmnt,
+      values.infstctr_lvrage,
+      values.tech_innovation,
+      values.ed_innovation,
+      values.outreach_scale,
+      values.ntwork_blding,
+      values.complex_thinking
     );
     oldProject.validate();
 

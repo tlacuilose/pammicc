@@ -15,7 +15,6 @@ export default function ProjectList() {
   }
   const handleClose = () => setOpen(false);
 
-
   useEffect(() => {
     getProjects();
   }, []);
@@ -35,11 +34,10 @@ export default function ProjectList() {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        className="overflow-scroll"
       >
         <ProjectDetail showDetails={{}} project={openedProject} close={handleClose}/>
-
       </Modal>
     </div>
-
   );
 }
