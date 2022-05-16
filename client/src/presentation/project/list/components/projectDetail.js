@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import TagsList from "../../../application/components/tags-list";
 import MaturityTable from "./MaturityTable"
 import { useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
+import { AuthContext } from "./../../../application/contexts/auth-context";
 
 const dimensions = ["BOUNDED CS", "THRESHOLD CS", "FULL-CYCLE CS"]
 
 
 const ProjectDetail = React.forwardRef((props, ref) => {
-  const [cookies] = useCookies();
+  const { authUser } = useContext(AuthContext);
 
-  const isOwner = cookies.session && cookies.session._id === props.project.userid;
+  const isOwner = authUser && authUser.id === props.project.userid;
 
   let navigate = useNavigate()
 
@@ -22,7 +22,7 @@ const ProjectDetail = React.forwardRef((props, ref) => {
     <div className="card bg-base-100 shadow-xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 background-blue max-w-5xl">
       <div className="card-body snap-center">
         <h2 className="card-title overflow-y-auto max-h-[15vh]">{props.project.name}</h2>
-        <p className="overflow-y-auto max-h-[30vh]">{props.project.description}</p>
+        <p className="overflow-y-auto max-h-[20vh]">{props.project.description}</p>
         <p>
           Project link:<br />
           <a
@@ -33,8 +33,12 @@ const ProjectDetail = React.forwardRef((props, ref) => {
           </a>
         </p>
         <p>Project maturity : {dimensions[Math.round(average || 0) - 1]}</p>
-        <MaturityTable project={props.project} editing={false}/>
-        <TagsList tags={props.project.tags} />
+        <div className="overflow-y-auto max-h-[35vh]">
+          <MaturityTable project={props.project} editing={false}/>
+        </div>
+        <div className="overflow-y-auto max-h-[15vh]">
+          <TagsList tags={props.project.tags} />
+        </div>
         <div className="card-actions justify-end overflow-x-hidden">
           {isOwner && <button className="btn btn-active btn-secondary" onClick={navigateToEdit}>Edit</button>}
           <button className="btn btn-primary" onClick={props.close}>Close</button>

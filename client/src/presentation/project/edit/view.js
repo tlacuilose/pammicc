@@ -110,6 +110,7 @@ export default function ProjectEdit() {
               />
             </div>
             <TagsList tags={tags} />
+            <h1 className="card-title text-xl my-4">Select the cell that best describes each dimension component:</h1>
             <MaturityTable project={components} editing={true} updateComponent={handleUpdateComponent} />
             <div className="form-control mt-6">
               <div className="flex justify-end">

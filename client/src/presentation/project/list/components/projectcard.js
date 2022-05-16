@@ -33,7 +33,9 @@ export default function ProjectCard(props) {
             {props.project.url}
           </a>
         </p>
-        <TagsList tags={props.project.tags} />
+        <div className="overflow-y-auto h-24">
+          <TagsList tags={props.project.tags} />
+        </div>
         <div className="card-actions justify-end">
           {isOwner && <button className="btn btn-active btn-secondary" onClick={navigateToEdit}>Edit</button>}
           <button className="btn btn-primary" onClick={() => props.showDetails(props.project)}>View</button>

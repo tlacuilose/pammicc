@@ -28,7 +28,7 @@ export default function TagsList(props) {
   }
 
   return (
-    <div className="h-24 overflow-x-scroll">
+    <div>
       {tagsList}
     </div>
   );

@@ -1766,6 +1766,10 @@ html {
   margin-left: auto;
   margin-right: auto;
 }
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
 .ml-2 {
   margin-left: 0.5rem;
 }
@@ -1793,17 +1797,20 @@ html {
 .h-6 {
   height: 1.5rem;
 }
-.h-24 {
-  height: 6rem;
-}
 .h-32 {
   height: 8rem;
+}
+.h-24 {
+  height: 6rem;
 }
 .max-h-\[15vh\] {
   max-height: 15vh;
 }
-.max-h-\[30vh\] {
-  max-height: 30vh;
+.max-h-\[20vh\] {
+  max-height: 20vh;
+}
+.max-h-\[35vh\] {
+  max-height: 35vh;
 }
 .min-h-\[80vh\] {
   min-height: 80vh;
@@ -1875,9 +1882,6 @@ html {
 }
 .overflow-x-hidden {
   overflow-x: hidden;
-}
-.overflow-x-scroll {
-  overflow-x: scroll;
 }
 .whitespace-nowrap {
   white-space: nowrap;
@@ -1999,14 +2003,6 @@ html {
   --tw-drop-shadow: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
-
-/* .maturityTable{
-    
-} */
-/* .maturityTable th, .maturityTable td{
-    border: 1px solid white;
-    border-collapse: collapse;
-} */
 .hover\:bg-\[\#333333\]:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(51 51 51 / var(--tw-bg-opacity));
