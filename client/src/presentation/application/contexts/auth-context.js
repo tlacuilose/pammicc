@@ -14,18 +14,20 @@ const AuthContextProvider = ({ children }) => {
     const savedId = localStorage.getItem("userid");
     const savedUser = localStorage.getItem("username");
     const savedEmail = localStorage.getItem("useremail");
-    if ((savedId === null || savedId === undefined ) || (savedUser === null || savedUser === undefined) || (savedEmail === null || savedEmail === undefined)) {
+    const savedRole = localStorage.getItem("userrole")
+    if ((savedId === null || savedId === undefined ) || (savedUser === null || savedUser === undefined) || (savedEmail === null || savedEmail === undefined) || (savedRole === null || savedRole === undefined)) {
       setAuthUser(null)
     } else {
-      setAuthUser({id: savedId, name: savedUser, email: savedEmail});
+      setAuthUser({id: savedId, name: savedUser, email: savedEmail, role: savedRole});
     }
   }
 
-  function saveLocalAuthUser(id, name, email) {
+  function saveLocalAuthUser(id, name, email, role) {
       localStorage.setItem("userid", id);
       localStorage.setItem("username", name);
       localStorage.setItem("useremail", email)
-      setAuthUser({id: id, name: name, email: email});
+      localStorage.setItem("userrole", role)
+      setAuthUser({id: id, name: name, email: email, role: role});
   }
 
   useEffect(() => {
@@ -42,7 +44,7 @@ const AuthContextProvider = ({ children }) => {
         throw new Error("An error occured logging in.");
       }
 
-      saveLocalAuthUser(json.id, json.name, json.email);
+      saveLocalAuthUser(json.id, json.name, json.email, json.role);
       navigate(`/`);
     } catch (error) {
       setError(error)
@@ -59,7 +61,7 @@ const AuthContextProvider = ({ children }) => {
         throw new Error("An error occured registering user.");
       }
 
-      saveLocalAuthUser(json.id, json.name, json.email);
+      saveLocalAuthUser(json.id, json.name, json.email, json.role);
       navigate(`/`);
     } catch (error) {
       setError(error)
@@ -70,8 +72,10 @@ const AuthContextProvider = ({ children }) => {
     try {
       await authService.logoutUser();
 
+      localStorage.removeItem("userid");
       localStorage.removeItem("username");
       localStorage.removeItem("useremail");
+      localStorage.removeItem("userrole");
 
       setAuthUser(null);
       navigate(`/`);

@@ -25,7 +25,7 @@ secureRoutes.route("/projects/new").post(function (req, response) {
 
     // Check that the user is project_uploader.
     role = jsonPayload.user.role
-    if(role!="project_uploader") {
+    if(!(role=="project_uploader" || role=="admin")) {
       response.status(403).send({ message: "Response has been declined" });
     }else{
       let db_connect = dbo.getDb();
@@ -61,7 +61,7 @@ secureRoutes.route("/projects/:id").put(function (req, response) {
   // Check that the user is project_uploader.
   role = jsonPayload.user.role;
   user_id = jsonPayload.user._id;
-  if(role!="project_uploader") {
+  if(!(role=="project_uploader" || role=="admin")) {
     response.status(403).send({ message: "Response has been declined" });
   }else{
     let db_connect = dbo.getDb();
@@ -70,7 +70,7 @@ secureRoutes.route("/projects/:id").put(function (req, response) {
       .collection("projects")
       .findOne(id_query, function (err, result) {
         if (err) throw err;
-        if (result.userid != user_id) {
+        if (!(result.userid == user_id || role == 'admin')) {
           return response.status(401).send('No auth');
         } else {
           let new_values = {
@@ -110,7 +110,7 @@ secureRoutes.route("/projects/:id").delete(function (req, response) {
   // Check that the user is project_uploader.
   role = jsonPayload.user.role;
   user_id = jsonPayload.user._id;
-  if(role!="project_uploader") {
+  if(!(role=="project_uploader" || role=="admin")) {
     response.status(403).send({ message: "Response has been declined" });
   }else{
     let db_connect = dbo.getDb();
@@ -120,7 +120,7 @@ secureRoutes.route("/projects/:id").delete(function (req, response) {
       .findOne(id_query, function (err, result) {
         if (err) throw err;
         console.log("updating project"  + req.params.id)
-        if (result.userid != user_id) {
+        if (!(result.userid == user_id || role=="admin")) {
           return response.status(401).send('No auth');
         } else {
           let db_connect = dbo.getDb();
@@ -140,7 +140,7 @@ secureRoutes.route("/admin/test").get(function(req,response){
   if (req && req.cookies) token = req.cookies['jwt'];
   jsonPayload = parseJwt(token);
   role = jsonPayload.user.role
-  if(role!="project_uploader") {
+  if(role!="admin") {
     response.status(403).send({ message: "Response has been declined" });
   }else{
     response.status(200).send({ message: "Response has been approved" });

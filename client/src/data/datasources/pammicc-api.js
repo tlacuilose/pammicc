@@ -72,7 +72,7 @@ export async function updateProject(oldProject, id) {
   })
 
   if (!response.ok) {
-    throw new Error("An error ocurred adding the project.")
+    throw new Error("An error ocurred editing the project.")
   }
 }
 

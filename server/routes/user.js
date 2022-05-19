@@ -49,7 +49,7 @@ userRoutes.route('/register').post((req, response, next) => {
                           secure: true,
                           maxAge: 9000000,
                       })
-                      response.json({id: user._id, name: user.name, email: user.email})
+                      response.json({id: user._id, name: user.name, email: user.email, role: user.role})
                   });
                 } catch (err) {
                   return next(err)
@@ -93,7 +93,7 @@ userRoutes.route('/login').post((req, response, next) => {
                     secure: true,
                     maxAge: 9000000,
                 })
-                response.json({id: user._id, name: user.name, email: user.email})
+                response.json({id: user._id, name: user.name, email: user.email, role: user.role})
             });
         } catch (err) {
             return next(err);
