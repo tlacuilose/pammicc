@@ -35,18 +35,9 @@ userRoutes.route('/register').post((req, response, next) => {
                   req.login(user, { session: false }, async (error) => {
                       if (error) return next(error);
                       const body = { _id: user._id, email: user.email , role: 'project_uploader'};
-                      const safeUser = { _id: user._id, name: user.name, email: user.email , role: 'project_uploader'};
                       const token = jwt.sign({ user: body }, secretJWT);
-                      response.cookie('session', safeUser, {
-                          httpOnly: true,
-                          sameSite: 'none',
-                          secure: true,
-                          maxAge: 9000000,
-                      })
                       response.cookie('jwt', token, {
                           httpOnly: true,
-                          sameSite: 'none',
-                          secure: true,
                           maxAge: 9000000,
                       })
                       response.json({id: user._id, name: user.name, email: user.email, role: user.role})
@@ -79,18 +70,9 @@ userRoutes.route('/login').post((req, response, next) => {
             req.login(user, { session: false }, async (error) => {
                 if (error) return next(error);
                 const body = { _id: user._id, email: user.email , role: user.role};
-                const safeUser = { _id: user._id, name: user.name, email: user.email , role: user.role};
                 const token = jwt.sign({ user: body }, secretJWT);
-                response.cookie('session', safeUser, {
-                    httpOnly: true,
-                    sameSite: 'none',
-                    secure: true,
-                    maxAge: 9000000,
-                })
                 response.cookie('jwt', token, {
                     httpOnly: true,
-                    sameSite: 'none',
-                    secure: true,
                     maxAge: 9000000,
                 })
                 response.json({id: user._id, name: user.name, email: user.email, role: user.role})
