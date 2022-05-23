@@ -8,7 +8,7 @@ const dimensions = ["BOUNDED CS", "THRESHOLD CS", "FULL-CYCLE CS"]
 export default function ProjectCard(props) {
   const { authUser } = useContext(AuthContext);
 
-  const isOwner = authUser && authUser.id === props.project.userid;
+  const isOwner = authUser && (authUser.id === props.project.userid || authUser.role === "admin");
 
   let navigate = useNavigate()
 

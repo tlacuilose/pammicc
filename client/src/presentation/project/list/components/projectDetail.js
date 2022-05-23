@@ -10,7 +10,7 @@ const dimensions = ["BOUNDED CS", "THRESHOLD CS", "FULL-CYCLE CS"]
 const ProjectDetail = React.forwardRef((props, ref) => {
   const { authUser } = useContext(AuthContext);
 
-  const isOwner = authUser && authUser.id === props.project.userid;
+  const isOwner = authUser && (authUser.id === props.project.userid || authUser.role === "admin");
 
   let navigate = useNavigate()
 
