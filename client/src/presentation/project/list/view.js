@@ -48,7 +48,7 @@ export default function ProjectList() {
 
   return (
     <div className="md:container md:mx-auto p-2 pb-8">
-      <div>
+      <div className="mb-4">
         <button className={isSelected === -1 ? "btn btn-primary mr-2" : "btn btn-selected mr-2"} onClick={() => filterByThreshold(-1)}>ALL</button>
         <button className={isSelected === 0 ? "btn btn-primary mr-2" : "btn btn-selected mr-2"} onClick={() => filterByThreshold(0)}>BOUNDED</button>
         <button className={isSelected === 1 ? "btn btn-primary mr-2" : "btn btn-selected mr-2"} onClick={() => filterByThreshold(1)}>THRESHOLD</button>
