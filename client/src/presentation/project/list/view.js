@@ -55,7 +55,9 @@ export default function ProjectList() {
         <button className={isSelected === 2 ? "btn btn-primary mr-2" : "btn btn-selected mr-2"} onClick={() => filterByThreshold(2)}>FULL-CYCLE</button>
       </div>
       {error ?
-        <ErrorAlert message="Failed to fetch projects" />
+        <div className="h-[80vh]">
+          <ErrorAlert message="Failed to fetch projects" />
+        </div>
         :
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {filteredProjects.map((project) => {
