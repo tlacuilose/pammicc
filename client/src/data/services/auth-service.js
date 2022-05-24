@@ -34,6 +34,8 @@ async function login(user) {
     },
     body: JSON.stringify(user),
     credentials: 'include',
+    crossDomain: true,
+    xhrFields: { withCredentials: true },
   })
   .catch(error => {
     throw error;
@@ -60,6 +62,8 @@ async function register(newUser) {
     },
     body: JSON.stringify(newUser),
     credentials: 'include',
+    crossDomain: true,
+    xhrFields: { withCredentials: true },
   })
   .catch(error => {
     throw error;
@@ -84,6 +88,8 @@ async function logout() {
       "Access-Control-Allow-Credentials": true,
     },
     credentials: 'include',
+    crossDomain: true,
+    xhrFields: { withCredentials: true },
   })
   .catch(error => {
     throw error;

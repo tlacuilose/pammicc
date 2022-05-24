@@ -46,6 +46,8 @@ export async function newProject(newProject) {
     },
     body: JSON.stringify(newProject),
     credentials: 'include',
+    crossDomain: true,
+    xhrFields: { withCredentials: true },
   })
   .catch(error => {
     throw error;
@@ -66,6 +68,8 @@ export async function updateProject(oldProject, id) {
     },
     body: JSON.stringify(oldProject),
     credentials: 'include',
+    crossDomain: true,
+    xhrFields: { withCredentials: true },
   })
   .catch(error => {
     throw error;
@@ -85,6 +89,8 @@ export async function deleteProject(id) {
       "Content-Type": "application/json",
     },
     credentials: 'include',
+    crossDomain: true,
+    xhrFields: { withCredentials: true },
   })
   .catch(error => {
     throw error;

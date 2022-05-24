@@ -37,6 +37,8 @@ userRoutes.route('/register').post((req, response, next) => {
                       const body = { _id: user._id, email: user.email , role: 'project_uploader'};
                       const token = jwt.sign({ user: body }, secretJWT);
                       response.cookie('jwt', token, {
+                          secure: true,
+                          sameSite: 'none',
                           httpOnly: true,
                           maxAge: 9000000,
                       })
@@ -72,6 +74,8 @@ userRoutes.route('/login').post((req, response, next) => {
                 const body = { _id: user._id, email: user.email , role: user.role};
                 const token = jwt.sign({ user: body }, secretJWT);
                 response.cookie('jwt', token, {
+                    secure: true,
+                    sameSite: 'none',
                     httpOnly: true,
                     maxAge: 9000000,
                 })
