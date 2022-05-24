@@ -59,7 +59,7 @@ export default function ProjectList() {
           <ErrorAlert message="Failed to fetch projects" />
         </div>
         :
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 min-h-[80vh]">
           {filteredProjects.map((project) => {
             return <li key={project.id}><ProjectCard showDetails={handleOpen} project={project} /></li>
           })}
