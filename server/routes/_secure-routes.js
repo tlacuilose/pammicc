@@ -23,6 +23,7 @@ function secureRoute(req, response, next) {
   let token = null;
   if (req && req.cookies) token = req.cookies['jwt'];
   let jsonPayload = parseJwt(token);
+  response.locals.jsonPayload = jsonPayload;
 
   // Check that the user is project_uploader.
   let role = jsonPayload.user.role;

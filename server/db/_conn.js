@@ -10,9 +10,9 @@ module.exports = {
     connectToServer: function (callback) {
         mongoose.connect(URI, (err) => {
             if (err) {
-                console.log("MongoDB Connection Error! :(")
+                console.log("Mongoose Connection Error! :(")
             } else {
-                console.log("MongoDB connected succesfully :)")
+                console.log("Mongoose connected succesfully :)")
                 dbConn = mongoose.connection;
             }
             return callback(err);

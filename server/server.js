@@ -6,6 +6,7 @@ const cors = require("cors");
 require("dotenv").config()
 // Get driver connection
 const dbo =require("./db/conn")
+const _db = require("./db/_conn")
 
 require('./configs/passport');
 
@@ -43,7 +44,7 @@ var corsOptions = {
 };
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use(require("./routes/project"));
+app.use(require("./routes/_project"));
 app.use(require('./routes/user'));
 app.use(passport.authenticate('jwt',{session:false}),secureRoutes)
 
@@ -53,6 +54,10 @@ app.listen(port, () => {
   dbo.connectToServer(function (err) {
     if (err) console.error(err);
   });
+
+  _db.connectToServer(function (err) {
+    if (err) console.error("Mongoose connect error", err);
+  })
 
   console.log(`Server is running on port: ${port}`);
 })

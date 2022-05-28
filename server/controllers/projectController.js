@@ -1,17 +1,25 @@
 const User = require("../models/User");
 const Project = require("../models/Project");
+// Helps in db connection.
+const dbo = require("../db/conn")
+
+// Converts id from string to ObjectId
+const ObjectId = require("mongodb").ObjectId;
 
 exports.getProjects = function (req, res) {
-  let db_connect = dbo.getDb();
+  //let db_connect = dbo.getDb();
+  console.log("refactored get all projects");
+
   Project
-    .find({}, null, function (err, result) {
+    .find({},function (err, result) {
+      console.log("PROJECTS:", result);
       if (err) throw err;
       res.json(result);
     });
 }
 
 exports.getById = function (req, res) {
-  console.log("Trying get");
+  console.log("refactored get project");
   let db_connect = dbo.getDb();
   let id_query = { _id: ObjectId(req.params.id) };
   Project
@@ -22,6 +30,8 @@ exports.getById = function (req, res) {
 }
 
 exports.newProject = function (req, response) {
+  console.log("refactored new project");
+  const jsonPayload = response.locals.jsonPayload; 
   let db_connect = dbo.getDb();
   let project = {
     name: req.body.name,
@@ -47,6 +57,8 @@ exports.newProject = function (req, response) {
 
 
 exports.updateProject = function (req, response) {
+  console.log("refactored update project");
+
   let db_connect = dbo.getDb();
   let id_query = { _id: ObjectId(req.params.id) };
   Project
@@ -85,6 +97,8 @@ exports.updateProject = function (req, response) {
 
 
 exports.deleteProject = function (req, response) {
+  console.log("refactored delete project");
+
   let db_connect = dbo.getDb();
   let id_query = { _id: ObjectId(req.params.id) };
 
