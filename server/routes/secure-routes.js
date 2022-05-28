@@ -1,6 +1,8 @@
 const express = require('express');
 const secureRoutes = express.Router();
 const cookieParser = require('cookie-parser');
+const atob = require("atob");
+
 // Helps in db connection.
 const dbo = require("../db/conn")
 
