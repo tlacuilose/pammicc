@@ -21,8 +21,10 @@ const ProjectDetail = React.forwardRef((props, ref) => {
   return (
     <div className="card bg-base-100 shadow-xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 background-blue max-w-5xl">
       <div className="card-body snap-center">
-        <h2 className="card-title overflow-y-auto max-h-[15vh]">{props.project.name}</h2>
-        <p className="overflow-y-auto max-h-[20vh]">{props.project.description}</p>
+        <div className="align-top max-h-[12vh] border-b overflow-y-auto border-base-content">
+          <h2 className="card-title">{props.project.name}</h2>
+        </div>
+        <p className="overflow-y-auto max-h-[18vh]">{props.project.description}</p>
         <p>
           Project link:<br />
           <a
@@ -32,11 +34,13 @@ const ProjectDetail = React.forwardRef((props, ref) => {
             {props.project.url}
           </a>
         </p>
-        <p>Project maturity : {dimensions[Math.round(average || 0) - 1]}</p>
-        <div className="overflow-y-auto max-h-[35vh]">
+        <p>Project maturity: 
+          <span className="badge badge-outline mx-2">{dimensions[Math.round(average || 0) - 1]}</span>
+        </p>
+        <div className="overflow-y-auto max-h-[30vh] my-2">
           <MaturityTable project={props.project} editing={false}/>
         </div>
-        <div className="overflow-y-auto max-h-[15vh]">
+        <div className="overflow-y-auto max-h-[8vh]">
           <TagsList tags={props.project.tags} />
         </div>
         <div className="card-actions justify-end overflow-x-hidden">
