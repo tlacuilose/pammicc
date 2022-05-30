@@ -1984,11 +1984,11 @@ html {
 .h-6 {
   height: 1.5rem;
 }
-.h-4 {
-  height: 1rem;
-}
 .h-\[80vh\] {
   height: 80vh;
+}
+.h-4 {
+  height: 1rem;
 }
 .h-24 {
   height: 6rem;
@@ -2017,14 +2017,11 @@ html {
 .w-6 {
   width: 1.5rem;
 }
-.w-4 {
-  width: 1rem;
-}
-.w-64 {
-  width: 16rem;
-}
 .w-full {
   width: 100%;
+}
+.w-4 {
+  width: 1rem;
 }
 .w-80 {
   width: 20rem;
@@ -2206,10 +2203,6 @@ html {
 .text-primary {
   --tw-text-opacity: 1;
   color: hsl(var(--p) / var(--tw-text-opacity));
-}
-.text-info {
-  --tw-text-opacity: 1;
-  color: hsl(var(--in) / var(--tw-text-opacity));
 }
 .text-base-300 {
   --tw-text-opacity: 1;

@@ -68,7 +68,7 @@ const ProjectDetail = React.forwardRef((props, ref) => {
               {content.map(e => {
                 if (props.editing)
                   return projectDimention === i ? 
-                    <td key={component + i++} className="cursor-pointer bg-primary text-black border border-base-content p-2" onClick={() => props.updateComponent(component, content.indexOf(e)-1)}>{e}</td>:
+                    <td key={component + i++} className="cursor-pointer bg-primary text-black border border-base-content p-2" onClick={() => props.updateComponent(component, 0)}>{e}</td>:
                     <td key={component + i++} className="cursor-pointer hover:bg-[#333333] border border-base-content p-2" onClick={() => props.updateComponent(component, content.indexOf(e)+1)}>{e}</td>
                 else
                   return projectDimention === i ? <td key={component + i++} className="bg-green-500 text-black border border-base-content">{e}</td> : <td key={component + i++} className="border border-base-content">{e}</td>
