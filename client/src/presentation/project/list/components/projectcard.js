@@ -19,11 +19,15 @@ export default function ProjectCard(props) {
   let average = (props.project.ctxt_awareness + props.project.citzn_engmnt + props.project.infstctr_lvrage + props.project.tech_innovation + props.project.ed_innovation + props.project.outreach_scale + props.project.ntwork_blding + props.project.complex_thinking) / 8
 
   return (
-    <div className="card bg-base-100 shadow-xl">
+    <div className="card bg-base-100 shadow-2xl">
       <div className="card-body">
-        <h2 className="card-title h-32 overflow-hidden">{props.project.name}</h2>
-        <p>Project maturity : {dimensions[Math.round(average || 0) - 1]}</p>
-        <p className="h-32 overflow-hidden">{props.project.description.substring(0, 100) + "..."}</p>
+        <div className="align-top h-24 border-b overflow-hidden border-base-content">
+          <h2 className="card-title text-ellipsis">{props.project.name.length > 65 ? props.project.name.substring(0, 65) + "..." : props.project.name}</h2>
+        </div>
+        <p>Project maturity: <br></br>
+          <span className="badge badge-outline">{dimensions[Math.round(average || 0) - 1]}</span>
+        </p>
+        <p className="h-32 overflow-hidden">{props.project.description.length > 135 ? props.project.description.substring(0, 135) + "..." : props.project.description}</p>
         <p className="h-24 overflow-hidden">
           Project link:<br />
           <a
