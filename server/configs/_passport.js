@@ -30,10 +30,8 @@ passport.use(
     )
 );
 
-const dbo = require('../db/conn');
 
 const loginCallback = (req, email, password, done) => {
-    const db_connect = dbo.getDb();
 
     User.findOne({ email }, (err, user) => {
         if (err) throw err;
@@ -62,7 +60,6 @@ const loginStrategy = new PassportLocal(
 passport.use('login', loginStrategy);
 
 const signUpCallback = (req, email, password, done) => {
-    const db_connect = dbo.getDb();
 
     User.findOne({ email }, async (err, doc) => {
         if (err) return done(null, false, { res: err });

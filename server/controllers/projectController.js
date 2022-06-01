@@ -12,7 +12,6 @@ exports.getProjects = function (req, res) {
 
   Project
     .find({},function (err, result) {
-      console.log("PROJECTS:", result);
       if (err) throw err;
       res.json(result);
     });
@@ -20,7 +19,7 @@ exports.getProjects = function (req, res) {
 
 exports.getById = function (req, res) {
   console.log("refactored get project");
-  let db_connect = dbo.getDb();
+
   let id_query = { _id: ObjectId(req.params.id) };
   Project
     .findOne(id_query, function (err, result) {
@@ -32,7 +31,7 @@ exports.getById = function (req, res) {
 exports.newProject = function (req, response) {
   console.log("refactored new project");
   const jsonPayload = response.locals.jsonPayload; 
-  let db_connect = dbo.getDb();
+
   let project = {
     name: req.body.name,
     description: req.body.description,
@@ -59,7 +58,6 @@ exports.newProject = function (req, response) {
 exports.updateProject = function (req, response) {
   console.log("refactored update project");
 
-  let db_connect = dbo.getDb();
   let id_query = { _id: ObjectId(req.params.id) };
   Project
     .findOne(id_query, function (err, result) {
@@ -99,7 +97,6 @@ exports.updateProject = function (req, response) {
 exports.deleteProject = function (req, response) {
   console.log("refactored delete project");
 
-  let db_connect = dbo.getDb();
   let id_query = { _id: ObjectId(req.params.id) };
 
   Project.deleteOne(id_query, function (err, result) {
@@ -108,7 +105,6 @@ exports.deleteProject = function (req, response) {
     if (!(result.userid == user_id || role == "admin")) {
       return response.status(401).send('No auth');
     } else {
-      let db_connect = dbo.getDb();
       let id_query = { _id: ObjectId(req.params.id) };
       Project.deleteOne(id_query, function (err, obj) {
         if (err) throw err;

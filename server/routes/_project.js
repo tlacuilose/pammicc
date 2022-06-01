@@ -7,12 +7,6 @@ const secureRoute = require('./_secure-routes');
 // The router is added as a middleware and controls requests in /project.
 const projectRoutes = express.Router();
 
-// Helps in db connection.
-const dbo = require("../db/conn")
-
-// Converts id from string to ObjectId
-const ObjectId = require("mongodb").ObjectId;
-
 // Get a list of all projects
 projectRoutes.route("/projects").get(projectController.getProjects);
 

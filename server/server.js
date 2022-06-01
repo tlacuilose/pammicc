@@ -8,7 +8,7 @@ require("dotenv").config()
 const dbo =require("./db/conn")
 const _db = require("./db/_conn")
 
-require('./configs/passport');
+require('./configs/_passport');  // sets passport strategies up
 
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
@@ -45,15 +45,15 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(require("./routes/_project"));
-app.use(require('./routes/user'));
+app.use(require('./routes/_user'));
 app.use(passport.authenticate('jwt',{session:false}),secureRoutes)
 
 
 app.listen(port, () => {
-  // Perform a database connection when server starts
-  dbo.connectToServer(function (err) {
+  //Perform a database connection when server starts
+   dbo.connectToServer(function (err) {
     if (err) console.error(err);
-  });
+  });   // old connection used by some handler's still
 
   _db.connectToServer(function (err) {
     if (err) console.error("Mongoose connect error", err);
