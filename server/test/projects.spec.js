@@ -68,32 +68,32 @@ describe('Test Project Model', () => {
             assert.ok(testProject._id);                    
         })
     })
-    /*
+
     describe('Project.update', function () {
         this.timeout(20000);
         it('should update a Project without error', async () => {
             // Make a reservation for bicycle with code 99
-            let testProject = await Project.findOne({email: "test@test.com"});
+            let testProject = await Project.findOne({name: "my project"});
 
-            assert.notEqual(testProject.name, "something else");
-            testProject.name = "something else";
+            assert.notEqual(testProject.description, "something else");
+            testProject.description = "something else";
             await testProject.save();
             
-            testProject = await Project.findOne({email: "test@test.com"});
-            assert.equal(testProject.name, "something else");
+            testProject = await Project.findOne({name: "my project"});
+            assert.equal(testProject.description, "something else");
         })
     })
 
-
+/*
     describe('Project.delete', function () {
         this.timeout(20000);
         it('should delete a Project without error', async () => {
             // Make a reservation for bicycle with code 99
-            let testProject = await Project.findOne({email: "test@test.com"});
+            let testProject = await Project.findOne({name: "my project"});
             assert.ok(testProject._id);
-            await Project.findOneAndDelete({email: "test@test.com"});
+            await Project.findOneAndDelete({name: "my project"});
 
-            testProject = await Project.findOne({email: "test@test.com"});
+            testProject = await Project.findOne({name: "my project"});
             assert.equal(testProject, null);
 
         })
