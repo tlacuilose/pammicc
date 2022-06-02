@@ -14,6 +14,7 @@ function parseJwt (token) {
 
 function secureRoute(req, response, next) {
   let token = null;
+  console.log("req.cookies", req.cookies);
   if (req && req.cookies) token = req.cookies['jwt'];
   let jsonPayload = parseJwt(token);
   response.locals.jsonPayload = jsonPayload;

@@ -61,7 +61,8 @@ exports.getUsers = (req, res, next) => {
 // Login  
 exports.login = (req, response, next) => {
     console.log("refactored login")
-
+    console.log("req !");
+    console.log(req);
     passport.authenticate("login", { session: false }, async (err, user) => {
         try {
             if (err || !user) {

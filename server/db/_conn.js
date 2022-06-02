@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 
 // Mongoose Setup
-const URI = process.env.ATLAS_URI;
+const URI = process.env.TEST ? process.env.TEST_ATLAS_URI : process.env.ATLAS_URI;
+console.log("Test mode?", process.env.TEST);
+console.log("URI", URI);
 const DB_NAME = process.env.DB_NAME;
 
 var dbConn;

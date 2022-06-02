@@ -14,8 +14,6 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const secureRoutes = require("./routes/_secure-routes");
 
-//JWT Middleware
-// require('./auth/auth');
 
 // Get Port from .env
 const port = process.env.PORT;

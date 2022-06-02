@@ -84,7 +84,7 @@ describe('Test Project Model', () => {
         })
     })
 
-/*
+
     describe('Project.delete', function () {
         this.timeout(20000);
         it('should delete a Project without error', async () => {
@@ -98,7 +98,7 @@ describe('Test Project Model', () => {
 
         })
     })
-    */
+   
     
     
 })

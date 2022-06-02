@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test_server": "TEST=true node ./bin/www",
+    "test_start": "cross-env TEST=true node server.js",
     "jasminetest": "jasmine",
     "mochatest": "node ./node_modules/mocha/bin/mocha.js"
   },
@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "atob": "^2.1.2",
+    "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -30,6 +31,7 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "nodemon": "^2.0.15"
   }
 }
