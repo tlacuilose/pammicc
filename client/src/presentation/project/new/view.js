@@ -21,6 +21,9 @@ export default function ProjectNew() {
   const handleUpdateComponent = (component, newValue) => {
     onChangeComponent(component, newValue)
   }
+
+  let completionCounter = '(' + Object.values(components).reduce((p, c) => (c > 0) ? p + 1 : p, 0) + '/' + Object.keys(components).length + ')';
+
   return (
     <div className="md:container md:mx-auto p-2">
       {error &&
@@ -30,9 +33,10 @@ export default function ProjectNew() {
         <div className="card shadow-2xl bg-base-100">
           <div className="card-body">
             <h1 className="card-title text-3xl">Upload a new project</h1>
+            <h2 className="card-title text-xl text-primary">Please fill in all fields and complete the table.</h2>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Project name</span>
+                <span className="label-text">1. Project name</span>
               </label>
               <input
                 type="text"
@@ -45,7 +49,7 @@ export default function ProjectNew() {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Project description</span>
+                <span className="label-text">2. Project description</span>
               </label>
               <input
                 type="text"
@@ -58,7 +62,7 @@ export default function ProjectNew() {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Project url</span>
+                <span className="label-text">3. Project url</span>
               </label>
               <input
                 type="text"
@@ -71,7 +75,7 @@ export default function ProjectNew() {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Project tags</span>
+                <span className="label-text">4. Project tags (separate each tag with a comma.)</span>
               </label>
               <input
                 type="text"
@@ -83,7 +87,7 @@ export default function ProjectNew() {
               />
             </div>
             <TagsList tags={tags} />
-            <h1 className="card-title text-xl my-4">Select the cell that best describes each dimension component:</h1>
+            <h1 className="card-title text-xl my-4">5. Select the dimension that best describes each component: {completionCounter}</h1>
             <MaturityTable project={components} editing={true} updateComponent={handleUpdateComponent} />
             <div className="form-control mt-6">
               <button

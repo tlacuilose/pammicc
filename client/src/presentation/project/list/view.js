@@ -48,18 +48,18 @@ export default function ProjectList() {
 
   return (
     <div className="md:container md:mx-auto p-2 pb-8">
-      <div className="mb-4">
-        <button className={isSelected === -1 ? "btn btn-primary mr-2" : "btn btn-selected mr-2"} onClick={() => filterByThreshold(-1)}>ALL</button>
-        <button className={isSelected === 0 ? "btn btn-primary mr-2" : "btn btn-selected mr-2"} onClick={() => filterByThreshold(0)}>BOUNDED</button>
-        <button className={isSelected === 1 ? "btn btn-primary mr-2" : "btn btn-selected mr-2"} onClick={() => filterByThreshold(1)}>THRESHOLD</button>
-        <button className={isSelected === 2 ? "btn btn-primary mr-2" : "btn btn-selected mr-2"} onClick={() => filterByThreshold(2)}>FULL-CYCLE</button>
+      <div>
+        <button className={isSelected === -1 ? "btn btn-primary mr-2 mb-4" : "btn btn-selected mr-2 mb-4"} onClick={() => filterByThreshold(-1)}>ALL</button>
+        <button className={isSelected === 0 ? "btn btn-primary mr-2 mb-4" : "btn btn-selected mr-2 mb-4"} onClick={() => filterByThreshold(0)}>BOUNDED</button>
+        <button className={isSelected === 1 ? "btn btn-primary mr-2 mb-4" : "btn btn-selected mr-2 mb-4"} onClick={() => filterByThreshold(1)}>THRESHOLD</button>
+        <button className={isSelected === 2 ? "btn btn-primary mr-2 mb-4" : "btn btn-selected mr-2 mb-4"} onClick={() => filterByThreshold(2)}>FULL-CYCLE</button>
       </div>
       {error ?
         <div className="h-[80vh]">
           <ErrorAlert message="Failed to fetch projects" />
         </div>
         :
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 min-h-[80vh]">
           {filteredProjects.map((project) => {
             return <li key={project.id}><ProjectCard showDetails={handleOpen} project={project} /></li>
           })}
