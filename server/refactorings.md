@@ -4,4 +4,4 @@
 
 2. Restructure a straightforward Express application into an MVC architecture. **Rationale:** better prepared for scaling and modifiability, implementing a layered approach that is more understandable for developers.
 
-3. Refactor secure-routes preliminary check into a single, reusable middleware function `secureRoute`. This function can be inserted in any other route that needs permissions by modifying the route declaration only and without touching the inner code of the code of the handler function. **Rationale**: SOLID principles, separation of concerns, reusability, modularity.
+3. Refactor secure-routes preliminary check into a single, reusable middleware function `secureRoute`. This function can be inserted in any other route that needs permissions by modifying the route declaration only and without touching the inner code of the code of the handler function. This function simply checks the JWT in the response. If valid, it passes to next handler; otherwise it rejects the request with 401 code. **Rationale**: SOLID principles, separation of concerns, reusability, modularity.

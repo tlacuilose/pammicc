@@ -1,11 +1,12 @@
 const express = require("express");
 const projectController = require('../controllers/projectController')
-const secureRoute = require('./_secure-routes');  
+const secureRoute = require('./parse-jwt');  
 
 // projectRoutes is an instance of the express router.
 // We define routes here.
 // The router is added as a middleware and controls requests in /project.
 const projectRoutes = express.Router();
+
 
 // Get a list of all projects
 projectRoutes.route("/projects").get(projectController.getProjects);

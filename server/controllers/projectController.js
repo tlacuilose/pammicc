@@ -11,7 +11,7 @@ exports.getProjects = function (req, res) {
   console.log("refactored get all projects");
 
   Project
-    .find({},function (err, result) {
+    .find({}, function (err, result) {
       if (err) throw err;
       res.json(result);
     });
@@ -30,7 +30,7 @@ exports.getById = function (req, res) {
 
 exports.newProject = function (req, response) {
   console.log("refactored new project");
-  const jsonPayload = response.locals.jsonPayload; 
+  const jsonPayload = response.locals.jsonPayload;
 
   let project = {
     name: req.body.name,
@@ -56,7 +56,10 @@ exports.newProject = function (req, response) {
 
 
 exports.updateProject = function (req, response) {
-  console.log("refactored update project");
+  // Check that the user is project_uploader.
+  const { jsonPayload } = response.locals;
+  const role = jsonPayload.user.role;
+  const user_id = jsonPayload.user._id;
 
   let id_query = { _id: ObjectId(req.params.id) };
   Project
@@ -81,7 +84,7 @@ exports.updateProject = function (req, response) {
             complex_thinking: req.body.complex_thinking,
           },
         };
-        
+
         Project
           .updateOne(id_query, new_values, function (err, res) {
             if (err) throw err;
@@ -96,12 +99,15 @@ exports.updateProject = function (req, response) {
 
 exports.deleteProject = function (req, response) {
   console.log("refactored delete project");
-
+  const { jsonPayload } = response.locals;
+  const role = jsonPayload.user.role;
+  const user_id = jsonPayload.user._id;
+  console.log("role", role);
+  console.log("user_id", user_id);
   let id_query = { _id: ObjectId(req.params.id) };
 
-  Project.deleteOne(id_query, function (err, result) {
+  Project.findOne(id_query, function (err, result) {
     if (err) throw err;
-    console.log("updating project" + req.params.id)
     if (!(result.userid == user_id || role == "admin")) {
       return response.status(401).send('No auth');
     } else {

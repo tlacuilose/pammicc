@@ -13,7 +13,7 @@ require('./configs/_passport');  // sets passport strategies up
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const secureRoutes = require("./routes/secure-routes");
+const secureRoutes = require("./routes/_secure-routes");
 
 //JWT Middleware
 // require('./auth/auth');

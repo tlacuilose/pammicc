@@ -1,37 +1,19 @@
 const express = require('express');
 const secureRoutes = express.Router();
-const cookieParser = require('cookie-parser');
-const atob = require("atob");
+const projectController = require('../controllers/projectController')
+const secureRoute = require('./parse-jwt');  
 
-// Helps in db connection.
-const dbo = require("../db/conn");
 
-// Converts id from string to ObjectId
-const ObjectId = require("mongodb").ObjectId;
+/* SECURE ROUTES use utility parse-jwt function */
 
-function parseJwt (token) {
-  let base64Url = token.split('.')[1];
-  let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  let jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-  }).join(''));
+// Upload a new project.
+secureRoutes.route("/projects/new").post(secureRoute,projectController.newProject);
 
-  return JSON.parse(jsonPayload);
-};
+// Update a project by id.
+secureRoutes.route("/projects/:id").put(secureRoute, projectController.updateProject);
 
-function secureRoute(req, response, next) {
-  let token = null;
-  if (req && req.cookies) token = req.cookies['jwt'];
-  let jsonPayload = parseJwt(token);
-  response.locals.jsonPayload = jsonPayload;
+// Delete a project
+secureRoutes.route("/projects/:id").delete(secureRoute, projectController.deleteProject);
 
-  // Check that the user is project_uploader.
-  let role = jsonPayload.user.role;
-  if (!(role=="project_uploader" || role=="admin")) {
-    return response.status(403).send({ message: "Response has been declined" })
-  }
-  // else
-  next();
-}
 
-module.exports = secureRoute
+module.exports = secureRoutes

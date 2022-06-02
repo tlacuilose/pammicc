@@ -60,12 +60,13 @@ const loginStrategy = new PassportLocal(
 passport.use('login', loginStrategy);
 
 const signUpCallback = (req, email, password, done) => {
-
+    console.log("Sign up callback");
     User.findOne({ email }, async (err, doc) => {
         if (err) return done(null, false, { res: err });
         if (doc) return done(null, false, { res: 'Account already exists' });
 
         if (!doc) {
+            console.log("Create new user");
             let hashedPassword = await bcrypt.hash(password, 10).catch((err) => {
                 console.error(err);
             })
@@ -77,8 +78,10 @@ const signUpCallback = (req, email, password, done) => {
                 lastName: req.body.lastName,
             };
 
-            await User.create(newUser);  // throws error
-            return done(null, newUser, { res: 'Created successfully' });
+            const user = await User.create(newUser);  // throws error
+            console.log("New user returned", user);
+
+            return done(null, user, { res: 'Created successfully' });
 
         };
     });

@@ -23,7 +23,8 @@ exports.register = (req, response, next) => {
         } else {
             console.log("registering user", user);
             User.updateOne({ _id: user._id }, { $set: { role: 'project_uploader' } })
-            .then(() => {
+            .then((updated) => {
+                console.log("After role assignment:", updated);
                 try {
                   req.login(user, { session: false }, async (error) => {
                       if (error) return next(error);
@@ -33,7 +34,7 @@ exports.register = (req, response, next) => {
                           httpOnly: true,
                           maxAge: 9000000,
                       })
-                      response.json({id: user._id, name: user.name, email: user.email, role: user.role})
+                      response.json({id: user._id, name: user.name, email: user.email, role: 'project_uploader'})
                   });
                 } catch (err) {
                   return next(err)
