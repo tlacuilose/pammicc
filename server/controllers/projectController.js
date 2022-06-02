@@ -1,7 +1,5 @@
 const User = require("../models/User");
 const Project = require("../models/Project");
-// Helps in db connection.
-const dbo = require("../db/conn")
 
 // Converts id from string to ObjectId
 const ObjectId = require("mongodb").ObjectId;

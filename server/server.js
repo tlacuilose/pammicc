@@ -5,7 +5,6 @@ const cors = require("cors");
 // Use dotenv to get environment variables.
 require("dotenv").config()
 // Get driver connection
-const dbo =require("./db/conn")
 const _db = require("./db/_conn")
 
 require('./configs/_passport');  // sets passport strategies up
@@ -51,9 +50,6 @@ app.use(passport.authenticate('jwt',{session:false}),secureRoutes)
 
 app.listen(port, () => {
   //Perform a database connection when server starts
-   dbo.connectToServer(function (err) {
-    if (err) console.error(err);
-  });   // old connection used by some handler's still
 
   _db.connectToServer(function (err) {
     if (err) console.error("Mongoose connect error", err);
